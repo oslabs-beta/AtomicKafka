@@ -1,18 +1,18 @@
 $(document).ready(function(){
-  const count = 10;
+  let count = 10;
   const data = {
-    labels : ["0","1","2","3","4","5", "6", "7", "8", "9"],
+    labels : [...Array(count).keys()].map(i => i.toString()),
     datasets : [
       {
         label: '# - Streamed number',
         backgroundColor: "rgba(50,220,220,0.5)",
-        data : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        data : Array(count).fill(0),
       }
     ]
   }
-  const updateData = function(oldVal, newVal){
-    const labels = oldVal["labels"];
-    const dataSetInitial = oldVal["datasets"][0]["data"];
+  const updateData = function(newVal){
+    const labels = data["labels"];
+    const dataSetInitial = data["datasets"][0]["data"];
     count++;
     labels.push(count.toString());
     labels.shift();
@@ -29,8 +29,8 @@ $(document).ready(function(){
   
   function webSocketInvoke() {
     var socket = io('http://localhost:3000');
-    socket.on('request', (value) => {
-      updateData(data, value);
+    socket.on('event', (value) => {
+      updateData(value);
       chart.update();
     });
   }
