@@ -15,7 +15,7 @@ class Confluent {
             brokers: [this.server],
             ssl,
             sasl
-          })
+        })
     }
  }
 

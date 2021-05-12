@@ -51,7 +51,7 @@ const produce = async () => {
             console.log("Error with producing: ", err);
         }
 
-    }, 10000)
+    }, 3000)
 }
 
 produce().catch(error => {
