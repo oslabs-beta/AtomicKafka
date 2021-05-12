@@ -3,4 +3,4 @@ kafka_1.*/
 kafka/
 node_modules/
 node_*/
-/vscode
+vscode/
