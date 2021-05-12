@@ -4,7 +4,8 @@ const consumer = kafka.consumer({
   })
 
   const consume = async () => {
-    await consumer.connect()
+    await consumer.connect();
+    // io.sockets.emit('connected', "Consumer Connected")
 
     await consumer.subscribe({
       topic: process.env.TOPIC,

@@ -3,11 +3,14 @@ const kafka = require('./kafka');
 const kafkaApp = express();
 const testRouter = express.Router();
 
+
 const path = require("path");
 
 const port = 3001;
 const consumer = require('./consumer.js')
+const consumerEvents = consumer.events;
 const producer = require('./producer.js')
+const producerEvents = producer.events;
 
 kafkaApp.use(express.urlencoded({ extended:true }))
 kafkaApp.use(express.json());
@@ -48,8 +51,9 @@ const io = require('socket.io')(server, {
 });
 
 io.on('connection', client => {
-  console.log('Connected');
-  consumer.on('message', function (message) {
+  console.log('server.js: IO Connected');
+  //this is where the error is
+  consumer.on(consumerEvents.REQUEST, function (message) {
     console.log(message);
     client.emit('event', message.value);
   });
