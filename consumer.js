@@ -34,3 +34,5 @@ const consumer = kafka.consumer({
     }
     process.exit(1)
   })
+
+  module.exports = consumer;

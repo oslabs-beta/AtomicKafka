@@ -59,38 +59,41 @@ produce().catch(error => {
     process.exit(1);
 })
 
-const consumer = kafka.consumer({
-    groupId: 'truck-group'
-  })
+// const consumer = kafka.consumer({
+//     groupId: 'truck-group'
+//   })
 
-  const consume = async () => {
-    await consumer.connect()
+//   const consume = async () => {
+//     await consumer.connect()
 
-    await consumer.subscribe({
-      topic: process.env.TOPIC,
-      // topic: process.env.TOPIC,
-      fromBeginning: true
-    })
+//     await consumer.subscribe({
+//       topic: process.env.TOPIC,
+//       // topic: process.env.TOPIC,
+//       fromBeginning: true
+//     })
 
-    await consumer.run({
-      eachMessage: async ({ topic, partition, message }) => {
-        console.log('Received message', {
-          topic,
-          partition,
-          key: message.key.toString(),
-          value: JSON.parse(message.value.toString()),
-          valueString: message.value.toString()
-        })
-      }
-    })
-  }
+//     await consumer.run({
+//       eachMessage: async ({ topic, partition, message }) => {
+//         console.log('Received message', {
+//           topic,
+//           partition,
+//           key: message.key.toString(),
+//           value: JSON.parse(message.value.toString()),
+//           valueString: message.value.toString()
+//         })
+//       }
+//     })
+//   }
 
-  consume().catch(async error => {
-    console.error(error)
-    try {
-      await consumer.disconnect()
-    } catch (e) {
-      console.error('Failed to gracefully disconnect consumer', e)
-    }
-    process.exit(1)
-  })
+//   consume().catch(async error => {
+//     console.error(error)
+//     try {
+//       await consumer.disconnect()
+//     } catch (e) {
+//       console.error('Failed to gracefully disconnect consumer', e)
+//     }
+//     process.exit(1)
+//   })
+
+
+module.exports = producer;
