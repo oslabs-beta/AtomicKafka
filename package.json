@@ -1,5 +1,5 @@
 {
-  "name": "AtomicKafka",
+  "name": "atomickafka",
   "version": "0.0.1",
   "description": "TBD",
   "main": "server_consumer.js",
