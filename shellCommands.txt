@@ -1,5 +1,0 @@
-create a topic:
-$ bin/kafka-topics.sh --create --topic topic_stream --bootstrap-server localhost:9092
-
-$ bin/kafka-server-start.sh config/server.properties - the bin is located in another kafka file. ultimately we should just connect to the confluent, but saving here anyway
-$ bin/zookeeper-server-start.sh config/zookeeper.properties - the bin is located in another kafka file. ultimately we should just connect to the confluent, but saving here anyway
