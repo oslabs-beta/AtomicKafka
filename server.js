@@ -7,10 +7,16 @@ const testRouter = express.Router();
 const path = require("path");
 
 const port = 3001;
-const consumer = require('./consumer.js')
-const consumerEvents = consumer.events;
+const consume = require('./consumer.js')
+// const consumerEvents = consumer.events;
+// console.log("CONSUMER EVENTS: ", consumer.events);
+
+
 const producer = require('./producer.js')
 const producerEvents = producer.events;
+
+
+
 
 kafkaApp.use(express.urlencoded({ extended:true }))
 kafkaApp.use(express.json());
@@ -25,7 +31,7 @@ kafkaApp.get('/', (req,res) => {
 /**
  * 404 handler
  */
- kafkaApp.use('*', (req, res) => {
+kafkaApp.use('*', (req, res) => {
   return res.status(404).send('********** GLOBAL BAD REQUEST / 404 ERROR **********');
 });
 
@@ -36,7 +42,6 @@ kafkaApp.use((err, req, res, next) => {
   console.log(err);
   return res.status(500).send('********** GLOBAL INTERNAL SERVER / 500 ERROR **********');
 });
-
 
 const server = kafkaApp.listen(port, () => {
   console.log(`Listening on port ${server.address().port}`);
@@ -50,14 +55,32 @@ const io = require('socket.io')(server, {
   }
 });
 
+consume((message) => {
+  io.sockets.emit('newMessage', { message })
+  console.log('socket emit message ', message)
+  // let messageValue = JSON.stringify(message.value);
+  // let messageKey = JSON.stringify(message.key);
+  let messageValue = message.value.toString('utf-8');
+  let messageKey = message.key.toString('utf-8');
+  console.log('*** messageValue', messageValue);
+  console.log('*** messageKey', messageKey);
+
+})
+
 io.on('connection', client => {
   console.log('server.js: IO Connected');
+  client.emit('client emitting')
   //this is where the error is
-  consumer.on(consumerEvents.REQUEST, function (message) {
-    console.log(message);
-    client.emit('event', message.value);
-  });
+  // consumer.on(consumerEvents.REQUEST, function (message) {
+  //   // console.log('*** IS THIS THE INSTRUMENT',message);
+  //   client.emit('event', message.value);
+  //   console.log("MESSAGE VALUE", message);
+  // });
+  client.on('sendMessage',({ message }) => {
+    console.log('*** MESSAGE SENT:', message)
+  })
   client.on('disconnect', () => {
     console.log('Client disconnected');
-   });
+  });
 });
+
