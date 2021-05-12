@@ -6,8 +6,8 @@ const testRouter = express.Router();
 const path = require("path");
 
 const port = 3001;
-// const consumer = require('./consumer.js')
-// const producer = require('./producer.js')
+const consumer = require('./consumer.js')
+const producer = require('./producer.js')
 
 kafkaApp.use(express.urlencoded({ extended:true }))
 kafkaApp.use(express.json());
@@ -48,7 +48,7 @@ const io = require('socket.io')(server, {
 });
 
 io.on('connection', client => {
-  console.log('Connected', client);
+  console.log('Connected');
   consumer.on('message', function (message) {
     console.log(message);
     client.emit('event', message.value);
