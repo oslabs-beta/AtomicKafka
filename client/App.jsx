@@ -7,8 +7,9 @@ import io from 'socket.io-client'
 
 function webSocketInvoke () {
   var socket = io('http://localhost:3001')
-  socket.on('message', value => {
-    console.log('SOCKET IS ON', value);
+  socket.on('newMessage', (arg) => {
+    // let message = arg.value.toString('utf-8');
+    console.log('listener argument', arg)
   })
 }
 webSocketInvoke()
