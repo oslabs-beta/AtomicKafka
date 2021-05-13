@@ -13,17 +13,17 @@ import io from "socket.io-client";
 // }
 // webSocketInvoke();
 //, {'multiplex': false}
+const socket = io("http://localhost:3001");
 
 
 function App() {
-  const [truck, setTruck] = useState("");
+  const [truck, setTruck] = useState([]);
 
   useEffect(() => {
-  const socket = io("http://localhost:3001", {'multiplex': false});
     socket.on("newMessage",  (arg) => {
       console.log("new data: ", arg);
       // console.log("data type: ", typeof arg);
-      return setTruck(arg);
+      return setTruck(arr => [...arr, arg]);
       console.log("new truck state: ", truck);
     });
 
@@ -31,11 +31,18 @@ function App() {
     //   console.log("am i ever off?");
     //   socket.off();
     // }
-  }, [truck]);
+  });
 
   return (
     <div>
-      <h1>LIVE DATA: {truck}</h1>
+      <h1>LIVE DATA: {console.log("truck state: ", truck)}</h1>
+      <ul>
+        {truck.map((num, indx) => {
+          return (
+            <li key={indx}>{num}</li>
+          )
+        })}
+      </ul>
     </div>
   );
 }
