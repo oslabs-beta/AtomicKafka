@@ -14,12 +14,12 @@ import io from "socket.io-client";
 // webSocketInvoke();
 //, {'multiplex': false}
 
+const socket = io("http://localhost:3001");
 
 function App() {
   const [truck, setTruck] = useState("");
 
   useEffect(() => {
-  const socket = io("http://localhost:3001", {'multiplex': false});
     socket.on("newMessage",  (arg) => {
       console.log("new data: ", arg);
       // console.log("data type: ", typeof arg);
@@ -27,10 +27,9 @@ function App() {
       console.log("new truck state: ", truck);
     });
 
-    // return () => {
-    //   console.log("am i ever off?");
-    //   socket.off();
-    // }
+    // socket.on('disconnect', () => {
+    //   console.log('consumer disconnected')
+    // })
   }, [truck]);
 
   return (

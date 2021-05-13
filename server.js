@@ -59,20 +59,35 @@ const io = require('socket.io')(server, {
 
 //connect the consumer to the kafka cluster
 
-
 consume(message => {
   let messageValue = message.value.toString('utf-8');
   // console.log('socket emit message ', messageValue)
   io.on('connection', (socket) => {
     socket.emit("newMessage", messageValue)
   })
+  
+})
+.catch(async error => {
+  console.error(error)
+  try {
+    await consumer.disconnect()
+  } catch (e) {
+    console.error('Failed to gracefully disconnect consumer', e)
+  }
+  process.exit(1)
 })
 
+
+
 io.on('connection', (socket) => {
+  // socket.setMaxListeners(0)
   socket.on('postMessage', (data) => {
     console.log('***** POST:', data)
     produce(data);
   })
+  // socket.on('disconnect', () => {
+  //   console.log('post message disconnected')
+  // })
 })
 
 
