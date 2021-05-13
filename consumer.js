@@ -23,13 +23,13 @@ const consume = async (cb) => {
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       console.log('Received message');
-      // console.log('Received message', {
-      //   topic,
-      //   partition,
-      //   key: message.key.toString(),
-      //   value: message.value.toString()
-      //   // value: message.value
-      // })
+      console.log('Received message', {
+        topic,
+        partition,
+        key: message.key.toString(),
+        value: message.value.toString()
+        // value: message.value
+      })
       cb(message)
     }
   })

@@ -13,7 +13,7 @@ const consume = require('./consumer.js')
 // console.log("CONSUMER EVENTS: ", consumer.events);
 
 
-const producer = require('./producer.js')
+const produce = require('./producer.js')
 // const producerEvents = producer.events;
 
 
@@ -62,48 +62,18 @@ const io = require('socket.io')(server, {
 
 consume(message => {
   let messageValue = message.value.toString('utf-8');
-  console.log('socket emit message ', messageValue)
+  // console.log('socket emit message ', messageValue)
   io.on('connection', (socket) => {
-    // let messageValue = message.value;
-
     socket.emit("newMessage", messageValue)
-      // .then(arg => console.log('***THEN arg:', arg))
-      // .catch((err) => console.log('error in emitter, ' + err))
   })
-    // .then( io.on('newMessage', console.log('received message:', message)))
-    // .catch(err => console.log('***ERR', err))
-  // console.log('socket emit message ', message)
-  // let messageKey = JSON.stringify(message.key);
-  // let messageKey = message.key.toString('utf-8');
-  // console.log('*** messageValue', messageValue);
-  // console.log('*** messageKey', messageKey);
-  // io.on('newMessage', () => console.log('****Jumping Jehozavat'))
+})
+
+io.on('connection', (socket) => {
+  socket.on('postMessage', (data) => {
+    console.log('***** POST:', data)
+    produce(data);
+  })
 })
 
 
-// io.on('connection', (socket) => {
-//   socket.on('newMessage', (arg) => {
-//     console.log('listener argument', arg)
-//   })
-//   console.log('this should appear after socket emit');
-// })
-
-// io.on('connection', (client) => {
-//   console.log('server.js: IO Connected');
-//   // console.log('*** client', client.client)
-//   // client.emit('client emitting')
-//   //this is where the error is
-//   // consumer.on(consumerEvents.REQUEST, function (message) {
-//     //   // console.log('*** IS THIS THE INSTRUMENT',message);
-//     //   client.emit('event', message.value);
-//     //   console.log("MESSAGE VALUE", message);
-//     // });
-
-//   client.on('newMessage', (message) => {
-//     console.log('*** MESSAGE SENT:', message.value.toString('utf-8'))
-//   })
-//   client.on('disconnect', () => {
-//     console.log('Client disconnected');
-//   });
-// });
 
