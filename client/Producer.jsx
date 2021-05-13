@@ -2,36 +2,41 @@ import React, { useState, useEffect } from "react";
 import { render } from 'react-dom'
 import io from 'socket.io-client'
 // const io = require('socket.io-client')
-const socket = io("http://localhost:3001");
 
+const socket = io("http://localhost:3001");
 
 function Producer() {
   const [num, setNum] = useState(30);
+  
+  // useEffect(() => {
+  //   // console.log('In useeffect of producer component')
+  //   // socket.emit('postMessage', {
+  //   //   key: String(3),
+  //   //   value: String(num)
+  //   // })
+  
+  //   // return () => {
+  //   //   console.log("is Producer ever off?");
+  //   //   socket.off();
+  //   // }
+  // });
 
-  useEffect(() => {
+  function socketProducerInvoke() {
+    setNum(num + 1);
+    console.log("the state of num is now...", num);
+    const socket = io('http://localhost:3001')
     socket.emit('postMessage', {
       key: String(3),
       value: String(num)
     })
-  
-      return () => {
-        console.log("am i ever off?");
-        socket.off();
-      }
-  });
-
-  // socketProducerInvoke () {
-  //   var socket = io('http://localhost:3001')
-  //   socket.emit('postMessage', {
-  //     key: String(3),
-  //     value: String(300)
-  //   })
-  // }
-
-
+    return () => {
+      console.log("is Producer ever off?");
+      socket.off();
+    }
+  }
     return (
       <div className="produceData">
-        <button className="produceDataButton" onClick={() => setNum(num + 1)}>PRODUCE</button>
+        <button className="produceDataButton" onClick={() => socketProducerInvoke()}>PRODUCE</button>
         <h2>I am responsive from Producer: {num}</h2>
       </div>
     )
