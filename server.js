@@ -59,6 +59,10 @@ const io = require('socket.io')(server, {
 
 //connect the consumer to the kafka cluster
 
+const atomicKafka = require('./atomic-kafka');
+const atomicKafkaInstance = new atomicKafka();
+// atomicKafka.produceSample()
+
 consume(message => {
   let messageValue = message.value.toString('utf-8');
   // console.log('socket emit message ', messageValue)
@@ -83,7 +87,9 @@ io.on('connection', (socket) => {
   // socket.setMaxListeners(0)
   socket.on('postMessage', (data) => {
     console.log('***** POST:', data)
-    produce(data);
+    // produce(data);
+    atomicKafkaInstance.produceSample(data);
+    setInterval((data) => atomicKafkaInstance.produceSample(data),1000);
   })
   // socket.on('disconnect', () => {
   //   console.log('post message disconnected')
