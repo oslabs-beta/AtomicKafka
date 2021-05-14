@@ -3,20 +3,20 @@ import { render } from 'react-dom'
 import io from 'socket.io-client'
 
 
-const socket = io("http://localhost:3001");
+// const socket = io("http://localhost:3001");
 
 function Producer() {
   const [num, setNum] = useState(30);
 
 
   function socketProducerInvoke() {
-    setNum(num + 1);
     console.log("the state of num is now...", num);
     const socket = io('http://localhost:3001')
     socket.emit('postMessage', {
       key: String(3),
       value: String(num)
     })
+    setNum(num + 1);
     return () => {
       console.log("is Producer ever off?");
       socket.off();
