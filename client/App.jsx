@@ -1,18 +1,8 @@
 import React, { useState, useEffect , useRef } from "react";
 import io from "socket.io-client";
-// const io = require('socket.io-client')
 
-// function webSocketInvoke() {
-//   const socket = io("http://localhost:3001");
-//   socket.on("newMessage", (arg) => {
-//     // let message = arg.value.toString('utf-8');
-//     console.log("listener argument", arg);
-//     setTruck(arg);
-//   });
-// }
-// webSocketInvoke();
-//, {'multiplex': false}
 
+// const socket = io("http://localhost:3001");
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -51,7 +41,7 @@ function App() {
         console.log("is App ever off?");
         socket.off();
       }
-  }, 1000);
+  }, 5000);
 
   return (
     <div>

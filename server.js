@@ -59,6 +59,9 @@ const io = require('socket.io')(server, {
 
 //connect the consumer to the kafka cluster
 
+const atomicKafka = require('./atomic-kafka');
+const atomicKafkaInstance = new atomicKafka();
+// atomicKafka.produceSample()
 
 consume(message => {
   let messageValue = message.value.toString('utf-8');
@@ -66,13 +69,31 @@ consume(message => {
   io.on('connection', (socket) => {
     socket.emit("newMessage", messageValue)
   })
+  
+})
+.catch(async error => {
+  console.error(error)
+  try {
+    await consumer.disconnect()
+  } catch (e) {
+    console.error('Failed to gracefully disconnect consumer', e)
+  }
+  process.exit(1)
 })
 
+
+
 io.on('connection', (socket) => {
+  // socket.setMaxListeners(0)
   socket.on('postMessage', (data) => {
     console.log('***** POST:', data)
-    produce(data);
+    // produce(data);
+    atomicKafkaInstance.produceSample(data);
+    // setInterval((data) => atomicKafkaInstance.produceSample(data), 1000);
   })
+  // socket.on('disconnect', () => {
+  //   console.log('post message disconnected')
+  // })
 })
 
 

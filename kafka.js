@@ -1,4 +1,4 @@
-const Confluent = require('./atomic-kafka');
+const Confluent = require('./confluent');
 require('dotenv').config();
 
 const { API_KEY, API_SECRET, KAFKA_BOOTSTRAP_SERVER } = process.env;

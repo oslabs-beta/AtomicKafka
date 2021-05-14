@@ -1,59 +1,36 @@
 const { CompressionTypes } = require('kafkajs');
 const kafka = require('./kafka');
 
-// const fs = require('fs');
-// const trucks = []
 
-// try {
-//     // read contents of the file
-//     const data = fs.readFileSync('truck_engine_sensors.json', 'UTF-8');
-//     // split the contents by new line
-//     const lines = data.split(/\r?\n/);
-//     // print all lines
-//     lines.pop();
-//     lines.forEach((line) => {
-//         // trucks.push(JSON.parse(line))
-//         trucks.push(line)
-//     });
-// } catch (err) {
-//     console.error(err);
-// }
-
-// PRODUCER
 
 const producer = kafka.producer()
 
-const produce = async (data) => {
-    await producer.connect();
-    // let idx = 0;
 
-    const interval = async () => {
-        // if(idx>=trucks.length-1) {
-        //     console.log('in here')
-        //     console.log(idx)
-        // }
-        try {
-            const responses = await producer.send({
-                topic : process.env.TOPIC,
-                messages : [
-                    data
-                ]
-            })
-        // console.log('Published message, engine_temperature', trucks[idx].engine_temperature )
-        // idx++;
-        }
-        catch (err) {
-            console.log("Error with producing: ", err);
-        }
-
+const executeSend = async (data) => {
+    // if (callback !== undefined) data = callback(data);
+    try {
+        // console.log('data in execute send: ', data)
+        const responses = await producer.send({
+            topic : process.env.TOPIC,
+            messages : [
+                data
+            ]
+        })
+    // console.log('Published message, engine_temperature', trucks[idx]
     }
-    interval();
+    catch (err) {
+        console.log("Error with producing: ", err);
+    }
 }
 
-// produce().catch(error => {
-//     console.log(error);
-//     process.exit(1);
-// })
+const produce = async (data, interval = 0) => {
+    await producer.connect();
+    // if (!interval) callback ? executeSend(data) : executeSend(data, callback);
+    // else setInterval((data, callback) => executeSend(data, callback), interval);
+    console.log('executing send with: ', data)
+    executeSend(data);
+}
+
 
 module.exports = produce;
 
