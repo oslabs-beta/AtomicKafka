@@ -1,22 +1,26 @@
 const { Kafka } = require('kafkajs')
+const produce = require('./producer.js')
+const consume = require('./consumer.js')
+//require in the socket
 
-class Confluent {
-    constructor(key, secret, server){
-        this.key = key;
-        this.secret = secret;
-        this.server = server;
+
+class atomicKafka {
+    constructor(){
+        //connect atomicKafka to the kafka client
+        this.kafkaAccess = Kafka,
+        this.produceSample = produce, //produceFn takes in 2 args: data, callback
+        this.consumeSample = consume //consumeSample takes in 1 arg: callback
+        //add consumer and producer functions ehre
+        //create the socket object, 
+        //this.io = require('socket.io)(server...)
     }
+    // generateKafaClient
+    // generateWebSocker
+}
 
-    create(client) {
-        const sasl = this.key && this.secret ? { username : this.key, password : this.secret , mechanism: 'plain' } : null
-        const ssl = !!sasl
-        return new Kafka({
-            clientId: client,
-            brokers: [this.server],
-            ssl,
-            sasl
-        })
-    }
- }
 
-module.exports = Confluent;
+module.exports = atomicKafka;
+
+
+
+
