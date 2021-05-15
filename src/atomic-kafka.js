@@ -26,7 +26,6 @@ class AtomicKafka {
 	//pass in topic string
 	async socketConsume (groupId, topic) {
 		const localConsumer = this.Consumers[groupId];
-		// console.log('*****LOCAL:',localConsumer)
 		localConsumer.consume(message => {
 			let messageValue = message.value.toString('utf-8');
 			this.io.on('connection', (socket) => {
@@ -34,7 +33,7 @@ class AtomicKafka {
 			})
 		}, topic)
 		.catch(async error => {
-			console.error(error)
+			// console.error(error)
 			try {
 				await localConsumer.disconnect()
 			} catch (e) {
