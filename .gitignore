@@ -2,3 +2,5 @@ node_modules/
 .env
 .vscode/
 package-lock.json
+build/
+confluent_key_bk.txt
