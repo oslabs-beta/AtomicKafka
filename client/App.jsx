@@ -26,7 +26,7 @@ function useInterval(callback, delay) {
 
 function App() {
   const [truck, setTruck] = useState([]);
-  
+
   useInterval(() => {
     const socket = io("http://localhost:3001");
       console.log('In useEffect of App!!');

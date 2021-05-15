@@ -5,11 +5,6 @@ const consumer = kafka.consumer({
 });
 
 
-// const callBack = ({ message })=> {
-//   io.sockets.emit('newMessage', { message })
-//   console.log('socket emit message ', { message })
-// };
-
 const consume = async (cb) => {
   await consumer.connect();
   // io.sockets.emit('connected', "Consumer Connected")
@@ -35,14 +30,5 @@ const consume = async (cb) => {
   })
 }
 
-// consume().catch(async error => {
-//   console.error(error)
-//   try {
-//     await consumer.disconnect()
-//   } catch (e) {
-//     console.error('Failed to gracefully disconnect consumer', e)
-//   }
-//   process.exit(1)
-// })
 
 module.exports = consume;
