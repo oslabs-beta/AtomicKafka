@@ -48,13 +48,17 @@ const io = require('socket.io')(kafkaServer, {
   }
 });
 
+const atomicKafka = require('./atomic-kafka.js')
+const atomicKafkaInstance = new atomicKafka(io);
+atomicKafkaInstance.socketProduce();
+atomicKafkaInstance.socketConsume();
+// module.exports = io;
 
 
-const consume = require('./consumer.js')
-const produce = require('./producer.js')
+// const consume = require('./consumer.js')
+// const produce = require('./producer.js')
 
-const atomicKafka = require('./atomic-kafka');
-const atomicKafkaInstance = new atomicKafka();
+// const atomicKafka = require('./atomic-kafka');
 
 // consume(message => {
 //   let messageValue = message.value.toString('utf-8');
@@ -71,7 +75,7 @@ const atomicKafkaInstance = new atomicKafka();
 //   }
 //   process.exit(1)
 // })
-// //do we need this catch
+//do we need this catch
 
 
 // io.on('connection', (socket) => {
@@ -83,4 +87,4 @@ const atomicKafkaInstance = new atomicKafka();
 
 
 
-module.exports = kafkaServer;
+// module.exports = kafkaServer;

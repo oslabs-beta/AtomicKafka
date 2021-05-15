@@ -2,6 +2,11 @@ const path = require('path');
 
 module.exports = {
   mode: process.env.NODE_ENV,
+  resolve: {
+    fallback: {"path":
+      require.resolve("path-browserify")
+    }
+  },
   entry: {
     main: path.resolve(__dirname,'./client/index.jsx')
   },
