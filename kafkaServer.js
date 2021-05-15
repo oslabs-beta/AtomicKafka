@@ -49,6 +49,7 @@ const io = require('socket.io')(server, {
 });
 
 
+
 const consume = require('./consumer.js')
 const produce = require('./producer.js')
 
@@ -81,3 +82,4 @@ io.on('connection', (socket) => {
 
 
 
+// module.exports = server;
