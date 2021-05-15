@@ -1,41 +1,42 @@
 const { Kafka } = require('kafkajs')
 const produce = require('./producer.js')
-const consume = require('./consumer.js')
-// const io = require('./kafkaServer.js')
-//connect the websocket to the kafkaServer
-// const kafkaServer = require('./kafkaServer.js');
-const { consumer } = require('./kafka.js');
-// const io = require('socket.io')(kafkaServer, {cors: {origin: '*'}});
 
-// const io = require('socket.io')(kafkaServer, {cors: {origin: '*'}});
+//class created for a single consumer
+const Consumer = require('./consumer.js');
 
-class atomicKafka {
+class AtomicKafka {
 	constructor(kafkaServer){
 		//connect atomicKafka to the kafka client
-		this.kafkaAccess = Kafka,
-		this.produceSample = produce, //produceFn takes in 2 args: data, callback
-		this.consumeSample = consume, //consumeSample takes in 1 arg: callback
+		this.kafkaAccess = Kafka;
+		this.produceSample = produce; //produceFn takes in 2 args: data, callback
+		this.Consumers = {}; //consumeSample takes in 1 arg: callback
 		this.io = require('socket.io')(kafkaServer, {
 			cors: {
 				origin: '*',
 			}
-		})
-		//add consumer and producer functions here
-		//set a poperty on atomic kafka that initializes an socket instance
+		});
 	}
-	// generateKafaClient
-	// generateWebSocker
-	socketConsume () {
-		this.consumeSample(message => {
+	//function to create a new consumer
+	//need to add an error that
+	newConsumer(groupId){
+		this.Consumers[groupId] = new Consumer(groupId);
+	}
+
+
+	//pass in topic string
+	async socketConsume (groupId, topic) {
+		const localConsumer = this.Consumers[groupId];
+		// console.log('*****LOCAL:',localConsumer)
+		localConsumer.consume(message => {
 			let messageValue = message.value.toString('utf-8');
 			this.io.on('connection', (socket) => {
 				socket.emit("newMessage", messageValue)
 			})
-		})
+		}, topic)
 		.catch(async error => {
 			console.error(error)
 			try {
-				await this.consumeSample.disconnect()
+				await localConsumer.disconnect()
 			} catch (e) {
 				console.error('Failed to gracefully disconnect consumer', e)
 			}
@@ -58,7 +59,7 @@ class atomicKafka {
 
 //is there a reason why this should be asynchronous? taking from kafkaServer.js
 
-module.exports = atomicKafka;
+module.exports = AtomicKafka;
 
 
 
