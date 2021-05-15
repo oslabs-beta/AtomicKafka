@@ -21,8 +21,8 @@ class Producer{
 		}
 	}
 
-	produce = (data, interval = 0) => {
-		this.producer.connect();
+	produce = async (data, interval = 0) => {
+		await this.producer.connect();
 		// if (!interval) callback ? executeSend(data) : executeSend(data, callback);
 		// else setInterval((data, callback) => executeSend(data, callback), interval);
 		console.log('executing send with: ', data)

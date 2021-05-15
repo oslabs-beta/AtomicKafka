@@ -9,8 +9,7 @@ class AtomicKafka {
 	constructor(kafkaServer){
 		//connect atomicKafka to the kafka client
 		this.kafkaAccess = Kafka;
-		this.produceSample = produce; //produceFn takes in 2 args: data, callback
-		this.Consumers = {}; //consumeSample takes in 1 arg: callback
+		this.Consumers = {};
 		this.Producers = {};
 		this.io = require('socket.io')(kafkaServer, {
 			cors: {

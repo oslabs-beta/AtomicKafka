@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack server --open & NODE_ENV=development nodemon src/kafkaServer.js"
+    "dev": "NODE_ENV=development webpack server --open & NODE_ENV=development nodemon srv-lib/kafkaServer.js"
   },
   "keywords": ["atomickafka_demo_pkg"],
   "author": "Nikhil <nikhil.massand@gmail.com>",
