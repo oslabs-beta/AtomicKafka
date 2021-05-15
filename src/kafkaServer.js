@@ -42,14 +42,14 @@ const kafkaServer = kafkaApp.listen(port, () => {
 
 //goal is to abstract away everything below this line. need
 
-const io = require('socket.io')(kafkaServer, {
-  cors: {
-    origin: '*',
-  }
-});
+// const io = require('socket.io')(kafkaServer, {
+//   cors: {
+//     origin: '*',
+//   }
+// });
 
 const atomicKafka = require('./atomic-kafka.js')
-const atomicKafkaInstance = new atomicKafka(io);
+const atomicKafkaInstance = new atomicKafka(kafkaServer);
 atomicKafkaInstance.socketProduce();
 atomicKafkaInstance.socketConsume();
 // module.exports = io;
