@@ -52,7 +52,8 @@ const AtomicKafka = require('./atomic-kafka.js')
 const atomicKafkaInstance = new AtomicKafka(kafkaServer);
 atomicKafkaInstance.newConsumer('truck-group');
 atomicKafkaInstance.socketConsume('truck-group', 'test_topic');
-atomicKafkaInstance.socketProduce();
+atomicKafkaInstance.newProducer('test_topic');
+atomicKafkaInstance.socketProduce('test_topic');
 // module.exports = io;
 
 

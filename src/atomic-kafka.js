@@ -3,6 +3,7 @@ const produce = require('./producer.js')
 
 //class created for a single consumer
 const Consumer = require('./consumer.js');
+const Producer = require('./producer.js');
 
 class AtomicKafka {
 	constructor(kafkaServer){
@@ -10,6 +11,7 @@ class AtomicKafka {
 		this.kafkaAccess = Kafka;
 		this.produceSample = produce; //produceFn takes in 2 args: data, callback
 		this.Consumers = {}; //consumeSample takes in 1 arg: callback
+		this.Producers = {};
 		this.io = require('socket.io')(kafkaServer, {
 			cors: {
 				origin: '*',
@@ -21,10 +23,13 @@ class AtomicKafka {
 	newConsumer(groupId){
 		this.Consumers[groupId] = new Consumer(groupId);
 	}
+	newProducer(topic){
+		this.Producers[topic] = new Producer(topic)
+	}
 
 
 	//pass in topic string
-	async socketConsume (groupId, topic) {
+	socketConsume (groupId, topic) {
 		const localConsumer = this.Consumers[groupId];
 		localConsumer.consume(message => {
 			let messageValue = message.value.toString('utf-8');
@@ -32,10 +37,10 @@ class AtomicKafka {
 				socket.emit("newMessage", messageValue)
 			})
 		}, topic)
-		.catch(async error => {
+		.catch(error => {
 			// console.error(error)
 			try {
-				await localConsumer.disconnect()
+				localConsumer.disconnect()
 			} catch (e) {
 				console.error('Failed to gracefully disconnect consumer', e)
 			}
@@ -43,11 +48,13 @@ class AtomicKafka {
 		})
 	}
 
-	socketProduce () {
+	socketProduce (topic) {
+		const localProducer = this.Producers[topic];
+		// console.log(localProducer)
 		this.io.on('connection', (socket) => {
 			socket.on('postMessage', (data) => {
 				console.log('***** POST:', data)
-				this.produceSample(data)
+				localProducer.produce(data)
 			})
 		})
 	}
