@@ -89,7 +89,7 @@ io.on('connection', (socket) => {
     console.log('***** POST:', data)
     // produce(data);
     atomicKafkaInstance.produceSample(data);
-    setInterval((data) => atomicKafkaInstance.produceSample(data),1000);
+    // setInterval((data) => atomicKafkaInstance.produceSample(data),1000);
   })
   // socket.on('disconnect', () => {
   //   console.log('post message disconnected')
