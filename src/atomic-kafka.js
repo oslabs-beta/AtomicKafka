@@ -41,7 +41,7 @@ class AtomicKafka {
 			// console.error(error)
 			try {
 				localConsumer.disconnect()
-			} catch (e) {
+			} catch (error) {
 				console.error('Failed to gracefully disconnect consumer', e)
 			}
 			process.exit(1)
