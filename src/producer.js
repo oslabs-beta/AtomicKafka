@@ -9,7 +9,7 @@ const executeSend = async (data) => {
 		const responses = await producer.send({
 			topic : process.env.TOPIC,
 			messages : [
-					data
+				data
 			]
 		})
 	}

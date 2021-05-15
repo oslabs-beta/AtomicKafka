@@ -17,14 +17,14 @@ kafkaApp.use(express.json());
 
 kafkaApp.get('/', (req,res) => {
   console.log('*** kafkaApp.get( / )');
-  res.sendFile(path.resolve(__dirname + '/index.html'))
+  res.sendFile(path.resolve(__dirname + './../index.html'))
 })
 
 /**
  * 404 handler
  */
 kafkaApp.use('*', (req, res) => {
-  return res.status(404).send('********** GLOBAL BAD REQUEST / 404 ERROR **********');
+  return res.status(404).send('********** KAFKASERVER GLOBAL BAD REQUEST / 404 ERROR **********');
 });
 
 /**
@@ -32,7 +32,7 @@ kafkaApp.use('*', (req, res) => {
  */
 kafkaApp.use((err, req, res, next) => {
   console.log(err);
-  return res.status(500).send('********** GLOBAL INTERNAL SERVER / 500 ERROR **********');
+  return res.status(500).send('********** KAFKASERVER GLOBAL INTERNAL SERVER / 500 ERROR **********');
 });
 
 
@@ -56,30 +56,31 @@ const produce = require('./producer.js')
 const atomicKafka = require('./atomic-kafka');
 const atomicKafkaInstance = new atomicKafka();
 
-consume(message => {
-  let messageValue = message.value.toString('utf-8');
-  io.on('connection', (socket) => {
-    socket.emit("newMessage", messageValue)
-  })
-})
-.catch(async error => {
-  console.error(error)
-  try {
-    await consumer.disconnect()
-  } catch (e) {
-    console.error('Failed to gracefully disconnect consumer', e)
-  }
-  process.exit(1)
-})
+// consume(message => {
+//   let messageValue = message.value.toString('utf-8');
+//   io.on('connection', (socket) => {
+//     socket.emit("newMessage", messageValue)
+//   })
+// })
+// .catch(async error => {
+//   console.error(error)
+//   try {
+//     await consumer.disconnect()
+//   } catch (e) {
+//     console.error('Failed to gracefully disconnect consumer', e)
+//   }
+//   process.exit(1)
+// })
+// //do we need this catch
 
 
-io.on('connection', (socket) => {
-  socket.on('postMessage', (data) => {
-    console.log('***** POST:', data)
-    atomicKafkaInstance.produceSample(data);
-  })
-})
+// io.on('connection', (socket) => {
+//   socket.on('postMessage', (data) => {
+//     console.log('***** POST:', data)
+//     atomicKafkaInstance.produceSample(data);
+//   })
+// })
 
 
 
-// module.exports = server;
+module.exports = kafkaServer;
