@@ -1,15 +1,15 @@
 {
-  "name": "atomickafka",
+  "name": "atomickafka-demo-pkg",
   "version": "1.0.0",
-  "description": "",
-  "main": "client/index.jsx",
+  "description": "a demo package for reference",
+  "main": "atomic-kafka.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack server --open & NODE_ENV=development nodemon srv-lib/kafkaServer.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["atomickafka_demo_pkg"],
+  "author": "Nikhil <nikhil.massand@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.17",
