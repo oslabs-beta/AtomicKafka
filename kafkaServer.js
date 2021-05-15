@@ -36,13 +36,13 @@ kafkaApp.use((err, req, res, next) => {
 });
 
 
-const server = kafkaApp.listen(port, () => {
-  console.log(`Listening on port ${server.address().port}`);
+const kafkaServer = kafkaApp.listen(port, () => {
+  console.log(`Listening on port ${kafkaServer.address().port}`);
 });
 
 //goal is to abstract away everything below this line. need
 
-const io = require('socket.io')(server, {
+const io = require('socket.io')(kafkaServer, {
   cors: {
     origin: '*',
   }
