@@ -8,18 +8,6 @@ class Consumer {
     });
   }
 
-  // getConsumer(){
-  //   // this.generateConsumer(this.groupId);
-  //   return this;
-  // }
-  //generates the consumer object
-  // generateConsumer(groupId){
-  //   this.consumer = kafka.consumer({
-  //     groupId: this.groupId
-  //   })
-  // }
-
-
   consume = async (cb, topic = process.env.TOPIC) => {
     await this.consumer.connect();
     // io.sockets.emit('connected', "Consumer Connected")
