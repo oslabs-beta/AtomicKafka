@@ -41,7 +41,6 @@ const kafkaServer = kafkaApp.listen(port, () => {
 });
 
 
-
 const AtomicKafka = require('./atomic-kafka.js')
 const atomicKafkaInstance = new AtomicKafka(kafkaServer);
 atomicKafkaInstance.newConsumer('truck-group');
