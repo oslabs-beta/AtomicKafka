@@ -8,15 +8,6 @@ const kafkaApp = express();
 const path = require("path");
 
 const port = 3001;
-const consume = require('./consumer.js')
-// const consumerEvents = consumer.events;
-// console.log("CONSUMER EVENTS: ", consumer.events);
-
-
-const produce = require('./producer.js')
-// const producerEvents = producer.events;
-
-
 
 
 kafkaApp.use(express.urlencoded({ extended:true }))
@@ -49,7 +40,7 @@ const server = kafkaApp.listen(port, () => {
   console.log(`Listening on port ${server.address().port}`);
 });
 
-
+//goal is to abstract away everything below this line. need
 
 const io = require('socket.io')(server, {
   cors: {
@@ -57,19 +48,18 @@ const io = require('socket.io')(server, {
   }
 });
 
-//connect the consumer to the kafka cluster
+
+const consume = require('./consumer.js')
+const produce = require('./producer.js')
 
 const atomicKafka = require('./atomic-kafka');
 const atomicKafkaInstance = new atomicKafka();
-// atomicKafka.produceSample()
 
 consume(message => {
   let messageValue = message.value.toString('utf-8');
-  // console.log('socket emit message ', messageValue)
   io.on('connection', (socket) => {
     socket.emit("newMessage", messageValue)
   })
-  
 })
 .catch(async error => {
   console.error(error)
@@ -82,18 +72,11 @@ consume(message => {
 })
 
 
-
 io.on('connection', (socket) => {
-  // socket.setMaxListeners(0)
   socket.on('postMessage', (data) => {
     console.log('***** POST:', data)
-    // produce(data);
     atomicKafkaInstance.produceSample(data);
-    // setInterval((data) => atomicKafkaInstance.produceSample(data), 1000);
   })
-  // socket.on('disconnect', () => {
-  //   console.log('post message disconnected')
-  // })
 })
 
 
