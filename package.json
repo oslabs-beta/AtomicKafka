@@ -8,11 +8,14 @@
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack server --open & NODE_ENV=development nodemon srv-lib/kafkaServer.js"
   },
-  "keywords": ["atomickafka_demo_pkg"],
+  "keywords": [
+    "atomickafka_demo_pkg"
+  ],
   "author": "David Behmoaras <dbehmoaras@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.17",
+    "atomic-kafka": "^0.0.1",
     "axios": "^0.21.1",
     "browserify": "^17.0.0",
     "css-loader": "^5.2.4",

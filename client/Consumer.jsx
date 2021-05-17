@@ -25,25 +25,21 @@ function useInterval(callback, delay) {
 
 function Consumer(props) {
   const [truck, setTruck] = useState([]);
-  // const akc = new AtomicKafkaClient('http://localhost:3001');
   
   
   useInterval(() => {
-    // let newArg = akc.clientSocketConsume().then(console.log('resolved'));
-    // console.log('newArg', newArg);
-    // setTruck([...truck, newArg]);
-    const socket = io("http://localhost:3001");
-    console.log('In useEffect of App!!');
-    socket.on("newMessage",  (arg) => {
-      console.log("new data: ", arg);
+    // const socket = io("http://localhost:3001");
+    // console.log('In useEffect of App!!');
+    props.socket.on("newMessage",  (arg) => {
+      // console.log("new data: ", arg);
       // console.log("data type: ", typeof arg);
-      console.log("new truck state: ", truck);
+      // console.log("new truck state: ", truck);
       return setTruck([...truck, arg]);
     });
 
     return () => {
-      console.log("is App ever off?");
-      socket.off();
+      // console.log("is App ever off?");
+      props.socket.off();
     }
 
   }, 5000);
