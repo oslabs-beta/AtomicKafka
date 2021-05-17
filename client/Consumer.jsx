@@ -1,8 +1,7 @@
 import React, { useState, useEffect , useRef } from "react";
 import io from "socket.io-client";
-
-
-// const socket = io("http://localhost:3001");
+// import AtomicKafkaClient from "./atomic-kafka-client.js";
+// const socket = io("/http://localhost:3001");
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -24,29 +23,36 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-function App() {
+function Consumer(props) {
   const [truck, setTruck] = useState([]);
-
+  // const akc = new AtomicKafkaClient('http://localhost:3001');
+  
+  
   useInterval(() => {
+    // let newArg = akc.clientSocketConsume().then(console.log('resolved'));
+    // console.log('newArg', newArg);
+    // setTruck([...truck, newArg]);
     const socket = io("http://localhost:3001");
-      console.log('In useEffect of App!!');
-      socket.on("newMessage",  (arg) => {
-        console.log("new data: ", arg);
-        // console.log("data type: ", typeof arg);
-        console.log("new truck state: ", truck);
-        return setTruck([...truck, arg]);
-      });
+    console.log('In useEffect of App!!');
+    socket.on("newMessage",  (arg) => {
+      console.log("new data: ", arg);
+      // console.log("data type: ", typeof arg);
+      console.log("new truck state: ", truck);
+      return setTruck([...truck, arg]);
+    });
 
-      return () => {
-        console.log("is App ever off?");
-        socket.off();
-      }
+    return () => {
+      console.log("is App ever off?");
+      socket.off();
+    }
+
   }, 5000);
 
   return (
     <div>
       <h1>LIVE DATA:</h1>
       <ul>
+        {/* {'state of truck: ', console.log(truck)} */}
         {truck.map((num, indx) => {
           return (
             <li key={indx}>{num}</li>
@@ -57,4 +63,4 @@ function App() {
   );
 }
 
-export default App;
+export default Consumer;

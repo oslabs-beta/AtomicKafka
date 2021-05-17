@@ -1,13 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import App from './App.jsx'
+import Consumer from './Consumer.jsx'
 import Producer from './Producer.jsx'
 
 render(
   <BrowserRouter>
     <h1>KAFKA_TEST_PAGE</h1>
-    <App />
+    <Consumer />
     <Producer />
   </BrowserRouter>,
   document.getElementById('root')
