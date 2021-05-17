@@ -24,25 +24,22 @@ function useInterval(callback, delay) {
 }
 
 function Consumer(props) {
+  // console.log('CONSUMER PROPS:',props);
+
   const [truck, setTruck] = useState([]);
-  
-  
+
   useInterval(() => {
-    // const socket = io("http://localhost:3001");
-    // console.log('In useEffect of App!!');
-    props.socket.on("newMessage",  (arg) => {
-      // console.log("new data: ", arg);
-      // console.log("data type: ", typeof arg);
-      // console.log("new truck state: ", truck);
+    const socket = io(props.socketString);
+    socket.on(props.socketEvent,  (arg) => {
       return setTruck([...truck, arg]);
     });
 
     return () => {
       // console.log("is App ever off?");
-      props.socket.off();
+      socket.off();
     }
 
-  }, 5000);
+  }, 2000);
 
   return (
     <div>

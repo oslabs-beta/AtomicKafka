@@ -1,62 +1,62 @@
 import React, { Component, useState, useEffect , useRef } from "react";
 import io from "socket.io-client";
-import Producer from './Producer.jsx';
-import Consumer from './Consumer.jsx';
 
+import ProducerModules from './ProducerModules.js';
+import ConsumerModules from './ConsumerModules.js';
 
 
 function AtomicKafkaClient(props) {
-  // const [producer, setProducer] = useState(Producer);
-  // const [consumer, setConsumer] = useState(Consumer);
-  const [socket, setSocket] = useState(io('http://localhost:3001'));
-  
+
+  // const socketString = 'http://localhost:3001';
+
+  const producers = populateProducers(props.socketString);
+  const consumers = populateConsumers(props.socketString);
+
   return (
     <div>
       <h3>AtomicKafkaClient Fn Component</h3>
-      <Producer socket={socket}/>
-      <Consumer socket={socket}/>
+      <div className='producersDiv'>
+        {producers}
+      </div>
+      <div className='consumersDiv'>
+        {consumers}
+      </div>
     </div>
   )
 }
 
+function populateProducers(sockString, sockEvents = {prod_0: 'postMessage'}) {
+  const outProds = [];
+  let i=0;
+  for (const key in ProducerModules){
+    const producer =
+      ProducerModules[key]({
+        socketString: sockString,
+        socketEvent: sockEvents[key],
+      })
+    outProds[outProds.length] = producer;
+    i+=1;
+  }
+  return outProds;
+}
+
+function populateConsumers(sockString, sockEvents = {cons_0: 'newMessage'}) {
+  const outCons = [];
+  let i=0;
+  for (const key in ConsumerModules){
+    const consumer =
+      ConsumerModules[key]({
+        socketString: sockString,
+        socketEvent: sockEvents[key],
+      });
+    outCons[outCons.length] = consumer;
+    i+=1;
+  }
+  return outCons;
+}
 
 
 export default AtomicKafkaClient;
 
-// class AtomicKafkaClient extends Component {
-//   constructor(props){
-//     super(props);
-//     this.socket = io(props.kafkaServer);
-//     this.Producer = Producer;
-    
-//     // this.io = require('socket.io-client')(kafkaServer, {
-// 		// 	cors: {
-// 		// 		origin: '*',
-// 		// 	}
-// 		// });
-//   }
-
-//   clientSocketConsume () {
-//     console.log('in client socket consume')
-//     console.log(this.socket);
-//     let output;
-//     // const socketFn = () => {
-//     this.socket.on('newMessage', (args) => {
-//       console.log('socket', this.socket)
-//       console.log('socket args', args)
-//       // return setState([...state, args]);
-//       output = args;
-//       return;
-//     })
-//     // )} 
-//     // this.io.off();
-//     // return;
-//     return output;
-//   }
-
-//   render () {
-
-//   }
-// }
 
 

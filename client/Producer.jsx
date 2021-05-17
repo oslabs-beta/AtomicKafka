@@ -7,17 +7,18 @@ import io from 'socket.io-client';
 function Producer(props) {
   const [num, setNum] = useState(30);
 
+
   function socketProducerInvoke() {
     // console.log("the state of num is now...", num);
-    // const socket = io("http://localhost:3001")
-    props.socket.emit('postMessage', {
+    const socket = io(props.socketString);
+    socket.emit(props.socketEvent, {
       key: String(3),
       value: String(num)
     })
     setNum(num + 1);
     return () => {
       // console.log("is Producer ever off?");
-      props.socket.off();
+      socket.off();
     }
   }
     return (
