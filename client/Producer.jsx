@@ -2,34 +2,22 @@ import React, { useState, useEffect } from "react";
 import { render } from 'react-dom';
 import io from 'socket.io-client';
 
-// import atomicKafka from './../src/atomic-kafka';
-// const atomicKafka = require('./../src/atomic-kafka.js')
-// const kafka = new atomicKafka();
 
-// const socket = io("http://localhost:3001");
 
-function Producer() {
+function Producer(props) {
   const [num, setNum] = useState(30);
 
-
   function socketProducerInvoke() {
-
-    // kafka.socketConsume({
-    //   key: String(3),
-    //   value: String(num)
-    // })
-
-
-    console.log("the state of num is now...", num);
-    const socket = io('http://localhost:3001')
-    socket.emit('postMessage', {
+    // console.log("the state of num is now...", num);
+    // const socket = io("http://localhost:3001")
+    props.socket.emit('postMessage', {
       key: String(3),
       value: String(num)
     })
     setNum(num + 1);
     return () => {
-      console.log("is Producer ever off?");
-      socket.off();
+      // console.log("is Producer ever off?");
+      props.socket.off();
     }
   }
     return (
