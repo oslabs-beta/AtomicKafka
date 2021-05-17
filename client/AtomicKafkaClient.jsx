@@ -4,19 +4,13 @@ import io from "socket.io-client";
 import ProducerModules from './ProducerModules.js';
 import ConsumerModules from './ConsumerModules.js';
 
-// const cons = require('./ConsumerModules.js')
-// console.log(ConsumerModules);
-
 
 function AtomicKafkaClient(props) {
-  console.log(ConsumerModules);
-  console.log(ProducerModules);
-  const socketString = 'http://localhost:3001';
 
+  // const socketString = 'http://localhost:3001';
 
-
-  const producers = populateProducers(socketString);
-  const consumers = populateConsumers(socketString);
+  const producers = populateProducers(props.socketString);
+  const consumers = populateConsumers(props.socketString);
 
   return (
     <div>
@@ -33,26 +27,30 @@ function AtomicKafkaClient(props) {
 
 function populateProducers(sockString, sockEvents = {prod_0: 'postMessage'}) {
   const outProds = [];
+  let i=0;
   for (const key in ProducerModules){
-    const producer = ProducerModules[key](
-      {
+    const producer =
+      ProducerModules[key]({
         socketString: sockString,
         socketEvent: sockEvents[key],
-      });
+      })
     outProds[outProds.length] = producer;
+    i+=1;
   }
   return outProds;
 }
 
-function populateConsumers(sockString,sockEvents = {cons_0: 'newMessage'}) {
+function populateConsumers(sockString, sockEvents = {cons_0: 'newMessage'}) {
   const outCons = [];
+  let i=0;
   for (const key in ConsumerModules){
-    const consumer = ConsumerModules[key](
-      {
+    const consumer =
+      ConsumerModules[key]({
         socketString: sockString,
         socketEvent: sockEvents[key],
       });
     outCons[outCons.length] = consumer;
+    i+=1;
   }
   return outCons;
 }

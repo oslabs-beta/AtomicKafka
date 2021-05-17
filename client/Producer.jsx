@@ -5,8 +5,8 @@ import io from 'socket.io-client';
 
 
 function Producer(props) {
-  console.log('PRODUCER PROPS:',props);
   const [num, setNum] = useState(30);
+
 
   function socketProducerInvoke() {
     // console.log("the state of num is now...", num);
