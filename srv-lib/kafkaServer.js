@@ -1,5 +1,5 @@
 const express = require('express');
-const kafka = require('./kafka');
+// const kafka = require('./kafka');
 const kafkaApp = express();
 // const testRouter = express.Router();
 
@@ -40,53 +40,10 @@ const kafkaServer = kafkaApp.listen(port, () => {
   console.log(`Listening on port ${kafkaServer.address().port}`);
 });
 
-//goal is to abstract away everything below this line. need
 
-// const io = require('socket.io')(kafkaServer, {
-//   cors: {
-//     origin: '*',
-//   }
-// });
-
-const AtomicKafka = require('./atomic-kafka.js')
+const AtomicKafka = require('atomic-kafka')
 const atomicKafkaInstance = new AtomicKafka(kafkaServer);
 atomicKafkaInstance.newConsumer('truck-group');
 atomicKafkaInstance.socketConsume('truck-group', 'test_topic');
 atomicKafkaInstance.newProducer('test_topic');
 atomicKafkaInstance.socketProduce('test_topic');
-// module.exports = io;
-
-
-// const consume = require('./consumer.js')
-// const produce = require('./producer.js')
-
-// const atomicKafka = require('./atomic-kafka');
-
-// consume(message => {
-//   let messageValue = message.value.toString('utf-8');
-//   io.on('connection', (socket) => {
-//     socket.emit("newMessage", messageValue)
-//   })
-// })
-// .catch(async error => {
-//   console.error(error)
-//   try {
-//     await consumer.disconnect()
-//   } catch (e) {
-//     console.error('Failed to gracefully disconnect consumer', e)
-//   }
-//   process.exit(1)
-// })
-//do we need this catch
-
-
-// io.on('connection', (socket) => {
-//   socket.on('postMessage', (data) => {
-//     console.log('***** POST:', data)
-//     atomicKafkaInstance.produceSample(data);
-//   })
-// })
-
-
-
-// module.exports = kafkaServer;

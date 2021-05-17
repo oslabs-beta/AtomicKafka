@@ -31,6 +31,7 @@ function App() {
     const socket = io("http://localhost:3001");
       console.log('In useEffect of App!!');
       socket.on("newMessage",  (arg) => {
+        // if(truck.length > 0 && )
         console.log("new data: ", arg);
         // console.log("data type: ", typeof arg);
         console.log("new truck state: ", truck);
