@@ -47,15 +47,9 @@ class AtomicKafka {
 		})
 	}
 
-	socketProduce (topic) {
+	socketProduce (topic, interval) {
 		const localProducer = this.Producers[topic];
-		// console.log(localProducer)
-		this.io.on('connection', (socket) => {
-			socket.on('postMessage', (data) => {
-				console.log('***** POST:', data)
-				localProducer.produce(data)
-			})
-		})
+		localProducer.produce(interval);
 	}
 }
 
