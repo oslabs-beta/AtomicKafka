@@ -1,5 +1,5 @@
 {
-  "name": "atomic-kafka",
+  "name": "atomickafka-beta-pkg",
   "version": "0.0.1",
   "description": "beta package",
   "main": "srv-lib/atomic-kafka.js",
