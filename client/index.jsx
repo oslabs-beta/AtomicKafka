@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 // import AtomicKafkaClient from './AtomicKafkaClient.jsx'
 // import Consumer from './Consumer.jsx'
 // import Producer from './Producer.jsx'
-import { Cons, Prod } from './KafkaModules.js'
+import { Cons, Prod } from './AtomicKafkaClientModule'
 
 const kafkaServerString = 'http://localhost:3001';
 
