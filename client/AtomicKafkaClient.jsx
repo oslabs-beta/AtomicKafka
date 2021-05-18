@@ -5,7 +5,11 @@ import ProducerModules from './ProducerModules.js';
 import ConsumerModules from './ConsumerModules.js';
 
 
-function AtomicKafkaClient(props) {
+import Producer from './Producer.jsx';
+import Consumer from './Consumer.jsx';
+
+
+function AtomicKafkaParent(props) {
 
   // const socketString = 'http://localhost:3001';
 
@@ -55,6 +59,11 @@ function populateConsumers(sockString, sockEvents = {cons_0: 'newMessage'}) {
   return outCons;
 }
 
+// const AtomicKafkaClient = {
+//   AtomicKafkaParent: AtomicKafkaParent,
+//   Producer: Producer,
+//   Consumer: Consumer
+// };
 
 export default AtomicKafkaClient;
 
