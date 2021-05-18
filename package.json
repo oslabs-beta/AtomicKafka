@@ -1,12 +1,14 @@
 {
   "name": "atomic-kafka",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "beta package",
   "main": "srv-lib/atomic-kafka.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["atomic-kafka"],
+  "keywords": [
+    "atomic-kafka"
+  ],
   "author": "David Behmoaras <dbehmoaras@gmail.com>",
   "license": "MIT",
   "dependencies": {
