@@ -4,6 +4,7 @@ const produce = require('./producer.js')
 //class created for a single consumer
 const Consumer = require('./consumer.js');
 const Producer = require('./producer.js');
+const SubmitProducer = require('./submitProducer.js');
 
 class AtomicKafka {
 	constructor(kafkaServer){
@@ -11,6 +12,7 @@ class AtomicKafka {
 		this.kafkaAccess = Kafka;
 		this.Consumers = {};
 		this.Producers = {};
+		this.SubmitProducers = {};
 		this.io = require('socket.io')(kafkaServer, {
 			cors: {
 				origin: '*',
@@ -23,7 +25,10 @@ class AtomicKafka {
 		this.Consumers[groupId] = new Consumer(groupId);
 	}
 	newProducer(topic){
-		this.Producers[topic] = new Producer(topic)
+		this.Producers[topic] = new Producer(topic);
+	}
+	newSubmitProducer(topic){
+		this.SubmitProducers[topic] = new SubmitProducer(topic);
 	}
 
 
@@ -51,6 +56,15 @@ class AtomicKafka {
 		const localProducer = this.Producers[topic];
 		localProducer.produce(interval);
 	}
+
+	socketSubmitProduce (topic, interval) {
+		const localProducer = this.SubmitProducers[topic];
+		this.io.on('connection', (socket) => {
+			socket.on('postMessage', (arg) => {
+				localProducer.produce(interval, arg);
+			})
+		})
+	}
 }
 
 
@@ -59,7 +73,3 @@ class AtomicKafka {
 //is there a reason why this should be asynchronous? taking from kafkaServer.js
 
 module.exports = AtomicKafka;
-
-
-
-
