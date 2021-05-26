@@ -1,6 +1,6 @@
 {
   "name": "atomic-kafka",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "beta package",
   "main": "srv-lib/atomic-kafka.js",
   "scripts": {
