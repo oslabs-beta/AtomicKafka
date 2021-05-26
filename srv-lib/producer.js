@@ -1,26 +1,33 @@
-const { CompressionTypes } = require('kafkajs');
+/**
+ *
+ * Defines the Producer class for AtomicKafka, which produces data from the client app
+ * to the Kafka cluster connected to AtomicKafka.
+ *
+ */
+
 const kafka = require('./kafka');
-const fs = require('fs');
-const { setConstantValue } = require('typescript');
-
-
 
 class Producer{
-	constructor(topic){
-		this.topic = topic;
+	constructor(){
+		/*
+			initializes a kafka producer instance using the kafka broker that was passed in
+			as the producer property
+		*/
 		this.producer = kafka.producer();
-		this.inputData = [];
 	}
 
-	executeSend = async (indx) => {
+	executeSend = async (data, topic) => {
 		try {
+			console.log('execute send this data: ', data)
+			/*
+			send a message to the Kafka cluster with the data passed in when socketProduce is invoked
+			and use the topic provided by the user to send message
+			*/
 			await this.producer.send({
-				topic : this.topic,
+				topic : topic,
 				messages : [
 					{
-						// data
-						key: String(indx),
-						value: String(this.inputData[indx]),
+						value: String(JSON.stringify(data)),
 					}
 				]
 			})
@@ -30,44 +37,17 @@ class Producer{
 		}
 	}
 
-	getData = async () => {
-		try {
-			const data = fs.readFileSync('salesData.json', 'UTF-8');
-			const lines = data.split(/\r?\n/);
-			// lines.pop();
-			lines.forEach((line) => {
-				this.inputData.push(line);
-			})
-		}
-		catch (err){
-			console.error(err);
-		}
-	}
 
-	produce = async (time = 0) => {
-		await this.getData();
+	/*
+		producer function: takes in data (as a JSON object) and a topic (as a string).
+		the producer connects to the kakfka cluster via the kafka broker that was required in and sends the data as the payload to the topic specified by the user
+	*/
+	produce = async (data, topic) => {
+		if(!data) return console.log('No data was passed in')
 		await this.producer.connect();
-		let i = 0;
-		const interval = setInterval(async () => {
-			console.log('i: ', i)
-			if(i > this.inputData.length - 1) {
-				i = 0;
-				//
-				// return;
-			}
-			try {
-				console.log('executing send with: ', this.inputData[i]);
-				await this.executeSend(i);
-				i++;
-			}
-			catch (err) {
-				console.log('Error with producing in produce(): ', err);
-			}
-		}, time)
-
+		await this.executeSend(data, topic)
 	}
 }
 
 
-
-module.exports = Producer;
+module.exports = Producer
