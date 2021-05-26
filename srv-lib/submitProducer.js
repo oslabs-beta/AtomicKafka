@@ -6,22 +6,20 @@ const { setConstantValue } = require('typescript');
 
 
 class SubmitProducer{
-	constructor(topic){
-		this.topic = topic;
+	constructor(){
 		this.producer = kafka.producer();
-		this.inputData = [];
 	}
 
-	executeSend = async (indx) => {
+	executeSend = async (data, topic) => {
 		try {
-			console.log('execute send this data: ', this.inputData[indx], String(this.inputData[indx]))
+			console.log('execute send this data: ', data)
 			await this.producer.send({
-				topic : this.topic,
+				topic : topic,
 				messages : [
 					{
 						// data
-						key: String(indx),
-						value: String(JSON.stringify(this.inputData[indx])),
+						key: String('test'),
+						value: String(JSON.stringify(data)),
 					}
 				]
 			})
@@ -31,50 +29,13 @@ class SubmitProducer{
 		}
 	}
 
-	getData = async (arg) => {
-		try {
-			let data, lines;
-			if (arg === null){
-				data = fs.readFileSync('salesData.json', 'UTF-8');
-				lines = data.split(/\r?\n/);
-				lines.forEach((line) => {
-					this.inputData.push(line);
-				})
-			} else {
-				this.inputData = [arg]
-			}
-			// lines.pop();
-		}
-		catch (err) {
-			console.error(err);
-		} // next step is to pass the event through the socket so we can customize actions with the producer & consumer
-	}
 
-	produce = async (time = 0, data = null) => {
-		console.log('producerjs data: ', data)
-		await this.getData(data);
+	produce = async (data = null, topic) => {
+		if(!data) return console.log('no data passed in')
+		console.log('submitProducerjs data: ', data)
+		console.log('submitProducerjs topic: ', topic)
 		await this.producer.connect();
-		let i = 0;
-		if(time !== 0){
-			const interval = setInterval(async () => {
-				console.log('i: ', i)
-				if(i > this.inputData.length - 1) {
-					i = 0;
-					//
-					// return;
-				}
-				try {
-					console.log('executing send with: ', this.inputData[i]);
-					await this.executeSend(i);
-					i++;
-				}
-				catch (err) {
-					console.log('Error with producing in produce(): ', err);
-				}
-			}, time)
-		}	else {
-			await this.executeSend(0)
-		}
+		await this.executeSend(data, topic)
 
 	}
 }
