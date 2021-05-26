@@ -13,7 +13,7 @@ const Producer = require('./producer.js');
  */
 
 
-class AtomicKafka {
+class AtomicKafkaServer {
 	constructor(kafkaServer){
 		//connect atomicKafka to the kafka client
 		this.kafkaAccess = Kafka;
@@ -70,4 +70,4 @@ class AtomicKafka {
 	}
 }
 
-module.exports = AtomicKafka;
+module.exports = AtomicKafkaServer;
