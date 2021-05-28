@@ -24,22 +24,24 @@ Atomic Kafka currently supports running Apache Kafka clusters either using a Doc
 - Follow the steps on [Confluent Cloud](https://www.confluent.io/confluent-cloud/) to create a free account with Confluent cloud. Obtain the ***API_ACCESS_KEY***, **_API_ACCESS_SECRET_**, and ***BOOTSTRAP_SERVER***
 
 ___
-### **2. Configure *.env* file. Include the following lines in your .env depending on your Kafka environment.**
-Docker .env config: (API_KEY and API_SECRET are intentionally left blank)
-```
-PORT=<USER_DEFINED>
-API_KEY=
-API_SECRET=
-KAFKA_BOOTSTRAP_SERVER=localhost:9092
-KAFKA_SSL=false
-```
-Confluent Cloud .env config: (PORT intentionally left blank)
-```
-PORT=<USER_DEFINED>
-API_KEY=<API_ACCESS_KEY>
-API_SECRET=<API_ACCESS_SECRET>
-KAFKA_BOOTSTRAP_SERVER=<BOOTSTRAP_SERVER>
-```
+### **2. Configure *.env* file.**
+Include the following lines in your .env depending on your Kafka environment.
+
+- Docker .env config: (***API_KEY*** and ***API_SECRET*** are intentionally left blank)
+  ```
+  PORT=<USER_DEFINED>
+  API_KEY=
+  API_SECRET=
+  KAFKA_BOOTSTRAP_SERVER=localhost:9092
+  KAFKA_SSL=false
+  ```
+- Confluent Cloud .env config: (***PORT*** intentionally left blank)
+  ```
+  PORT=<USER_DEFINED>
+  API_KEY=<API_ACCESS_KEY>
+  API_SECRET=<API_ACCESS_SECRET>
+  KAFKA_BOOTSTRAP_SERVER=<BOOTSTRAP_SERVER>
+  ```
 ___
 ### **3. Create Server Instance:**
 Initialize a server instance of your choice (HTTP, Node.js, etc). The example below contemplates a Node.js Express server.
