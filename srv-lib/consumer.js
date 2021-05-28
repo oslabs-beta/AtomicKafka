@@ -1,6 +1,7 @@
 /**
- * Defines the Consumer class for AtomicKafka, which consumes data 
+ * Defines the Consumer class for AtomicKafka, which consumes data
  * from the Kafka cluster connected to AtomicKafka.
+ * @param {string} groupId: string that identifies which consumer group on the kafka cluster to connect this consumer instance to
  */
 
 const kafka = require('./kafka');
@@ -19,8 +20,8 @@ class Consumer {
   /**
   *  the consume function takes a callback which is a socket emitter, this will send the message
   *  data to the frontend
-  *  @cb : Function, the callback that is passed in emits consumed messages through the socket
-  *  @topic : string, specifies the topic that the consumer should listen to from the cluster
+  *  @param {function} cb: the callback that is passed in emits consumed messages through the socket
+  *  @param {string} topic : string, specifies the topic that the consumer should listen to from the cluster
   */
   consume = async (cb, topic = process.env.TOPIC) => {
     await this.consumer.connect();
