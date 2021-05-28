@@ -57,7 +57,7 @@ class AtomicKafkaServer {
 			try {
 				socketConsumer.disconnect();
 			} catch (e) {
-				console.error('Failed to gracefully disconnect consumer', e);
+				console.error('Failed to gracefully disconnect consumer. Either the groupId, the topic, or the event are not recognized.', e);
 			}
 			process.exit(1);
 		})
