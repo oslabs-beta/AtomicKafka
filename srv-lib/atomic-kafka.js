@@ -1,7 +1,5 @@
 const { Kafka } = require('kafkajs')
-const produce = require('./producer.js')
 
-//class created for a single consumer
 const Consumer = require('./consumer.js');
 const Producer = require('./producer.js');
 const SubmitProducer = require('./submitProducer.js');
@@ -19,20 +17,23 @@ class AtomicKafka {
 			}
 		});
 	}
-	//function to create a new consumer
-	//need to add an error that
+	//instantiate a new consumer
 	newConsumer(groupId){
 		this.Consumers[groupId] = new Consumer(groupId);
 	}
+
+	//instantiate a new stream producer
 	newProducer(topic){
 		this.Producers[topic] = new Producer(topic);
 	}
+
+	//instantiate a new sumbission producer
 	newSubmitProducer(topic){
 		this.SubmitProducers[topic] = new SubmitProducer(topic);
 	}
 
 
-	//pass in topic string
+	//start the consumation process using
 	socketConsume (groupId, topic) {
 		const localConsumer = this.Consumers[groupId];
 		localConsumer.consume(message => {
@@ -42,7 +43,6 @@ class AtomicKafka {
 			})
 		}, topic)
 		.catch(error => {
-			// console.error(error)
 			try {
 				localConsumer.disconnect()
 			} catch (e) {
@@ -52,11 +52,13 @@ class AtomicKafka {
 		})
 	}
 
+	//begin producing off of a file stream
 	socketProduce (topic, interval) {
 		const localProducer = this.Producers[topic];
 		localProducer.produce(interval);
 	}
 
+	//begin producing off of a submission
 	socketSubmitProduce (topic, interval) {
 		const localProducer = this.SubmitProducers[topic];
 		this.io.on('connection', (socket) => {
@@ -67,9 +69,5 @@ class AtomicKafka {
 	}
 }
 
-
-
-
-//is there a reason why this should be asynchronous? taking from kafkaServer.js
 
 module.exports = AtomicKafka;

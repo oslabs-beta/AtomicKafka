@@ -1,4 +1,3 @@
-const { CompressionTypes } = require('kafkajs');
 const kafka = require('./kafka');
 const fs = require('fs');
 const { setConstantValue } = require('typescript');
