@@ -28,7 +28,7 @@ ___
 Include the following lines in your .env depending on your Kafka environment.
 
 - Docker .env config: (***API_KEY*** and ***API_SECRET*** are intentionally left blank)
-  ```
+  ```js
   PORT=<USER_DEFINED>
   API_KEY=
   API_SECRET=
@@ -36,7 +36,7 @@ Include the following lines in your .env depending on your Kafka environment.
   KAFKA_SSL=false
   ```
 - Confluent Cloud .env config: (***PORT*** intentionally left blank)
-  ```
+  ```js
   PORT=<USER_DEFINED>
   API_KEY=<API_ACCESS_KEY>
   API_SECRET=<API_ACCESS_SECRET>
@@ -51,7 +51,7 @@ Initialize a server instance of your choice (HTTP, Node.js, etc). The example be
 2. Require in ***AtomicKafkaServer***.
 3. Define a ***server*** that listens on the user-defined PORT environment variable.
 4. Initialize an AtomicKafkaServer instance ***aks*** by passing in the ***server***.
-```
+```js
 //initialize and configure expressApp according to user specifications
 
 const AtomicKafkaServer = require('atomic-kafka/server')
@@ -67,7 +67,7 @@ ___
 1. Initailize a **_newConsumer_** on the **_aks_** instance and pass in the **_group_ID_string_**.
 2. Enable the built-in websocket by invoking **_socketConsume_** and passing in the **_group_ID_string_**, an **_event_string_**, and the **_topic_string_**.
 
-```
+```js
 atomicKafkaInstance.newConsumer('group_ID_string');
 atomicKafkaInstance.socketConsume('group_ID_string', 'event_string', 'topic_string');
 ```
@@ -76,17 +76,17 @@ ___
 ### **4B. Create the Producer and enable the built-in websocket on the server:**
 1. Initailize a ***newProducer*** on the ***aks*** instance and pass in the ***topic_string***.
 2. Enable the built-in websocket by invoking ***globalProducer*** and passing in an ***event_string*** and the ***topic_string***.
-```
+```js
 atomicKafkaInstance.newProducer('topic_string');
 atomicKafkaInstance.globalProduce('postMessage', 'test_topic')
 ```
 ___
 ### **5A. JavaScript - Import Client Interface (React & Hooks)**
-```
+```js
 import AtomicKafkaClient from 'atomic-kafka/client';
 ```
 ### **5B. TypeScript - Import Client Interface (React & Hooks)**
-```
+```js
 declare function require(name:string)
 const AtomicKafkaClient = require('atomic-kafka/client').default
 ```
@@ -96,7 +96,7 @@ ___
   2. Define a callback to process message ***payload*** through the React state management tool of your choice.
   3. Implement ***useInterval*** to consume from the kafka cluster on interval.
   4. Return the invocation of the ***consumer*** function on the ***akc*** instance. Pass in a user-defined websocket ***event_string***, the previously defined ***callback***, and the ***interval_delay*** in milliseconds.
-```
+```js
 function Consumer_Component () {
 
   const akc = new AtomicKafkaClient(URI_STRING);
@@ -115,7 +115,7 @@ function Consumer_Component () {
 2. Generate a ***payload*** formatted as an arbitrarily-nested JSON object. The example below defines a payload, but it can be generated at any point in the client according to the user's specification.
 3. Invoke the consumer function. Pass in the websocket ***event_string*** and the ***payload***.
 
-```
+```js
 function Producer_Component () {
 
   const akc = new AtomicKafkaClient(URI_STRING);
