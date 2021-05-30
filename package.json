@@ -1,19 +1,37 @@
 {
   "name": "atomic-kafka",
-  "version": "0.0.3",
+  "version": "0.0.10",
   "description": "beta package",
-  "main": "srv-lib/atomic-kafka.js",
+  "main": "srv-lib/AtomicKafkaServer.js",
+  "exports": {
+    "./server": "./srv-lib/AtomicKafkaServer.js",
+    "./client": "./client-lib/AtomicKafkaClient.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
-    "atomic-kafka"
+    "atomic-kafka",
+    "kafka",
+    "apache-kafka",
+    "react",
+    "websockets",
+    "server",
+    "client",
+    "typescript"
   ],
-  "author": "David Behmoaras <dbehmoaras@gmail.com>",
+  "author": "AtomicKafka <atomickafkajs@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^9.0.1",
+    "jest": "^27.0.3",
     "kafkajs": "^1.15.0",
-    "socket.io": "^3.1.2"
+    "react": "^17.0.2",
+    "socket.io": "^3.1.2",
+    "socket.io-client": "^4.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oslabs-beta/AtomicKafka.git"
   }
 }

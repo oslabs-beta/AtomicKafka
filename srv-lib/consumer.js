@@ -1,38 +1,47 @@
+/**
+ * Defines the Consumer class for AtomicKafka, which consumes data
+ * from the Kafka cluster connected to AtomicKafka.
+ * @param {string} groupId: string that identifies which consumer group on the kafka cluster to connect this consumer instance to
+ */
+
 const kafka = require('./kafka');
 
 class Consumer {
   constructor(groupId){
-    // this.topic = topic;
+    /*
+		*	initializes a kafka consumer instance using the kafka broker that was passed in
+		*	as the consumer property
+		*/
     this.consumer = kafka.consumer({
       'groupId': groupId
     });
-  }
+  };
 
+  /**
+  *  the consume function takes a callback which is a socket emitter, this will send the message
+  *  data to the frontend
+  *  @param {function} cb: the callback that is passed in emits consumed messages through the socket
+  *  @param {string} topic : string, specifies the topic that the consumer should listen to from the cluster
+  */
   consume = async (cb, topic = process.env.TOPIC) => {
     await this.consumer.connect();
-    // io.sockets.emit('connected', "Consumer Connected")
-
     await this.consumer.subscribe({
       topic: topic,
-      // topic: process.env.TOPIC,
       fromBeginning: true
-    })
+    });
 
     await this.consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
-        console.log('Received message');
         console.log('Received message', {
           topic,
           partition,
-          key: message.key.toString(),
           value: message.value.toString()
-          // value: message.value
-        })
-        cb(message)
+        });
+        cb(message);
       }
-    })
-  }
-}
+    });
+  };
+};
 
 
 
