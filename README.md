@@ -1,16 +1,15 @@
 ![AtomicKafka_MastHead](./assets/logo_rect.png)
 
 ___
-<p style="text-align: center;">AtomicKafka is a lightweight <a href="https://github.com/oslabs-beta/AtomicKafka"> NPM Package </a> developed to simplify the process of establishing bidirectional, <br> 
-real-time data streaming with Apache Kafka in your web-app.
+<p align="center;">AtomicKafka is a lightweight <a href="https://github.com/oslabs-beta/AtomicKafka"> NPM Package </a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
 <br>
 <a href="">Homepage</a>
 <br>
-<a href="https://medium.com/@dbehmoaras/2eb79b20eaae">Article</a></p> 
+<a href="https://medium.com/@dbehmoaras/2eb79b20eaae">Article</a></p>
 
 
 <p align="center">
-  
+
   <a href="https://www.npmjs.com/package/atomic-kafka">
     <img alt="npm" src="https://img.shields.io/npm/v/atomic-kafka?color=%2366FCF1&style=for-the-badge">
   </a>
