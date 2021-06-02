@@ -29,31 +29,33 @@ real-time data streaming with Apache Kafka in your web-app.
 
 ___
 **<h2>Table of Contents</h2>**
-1. [Dependencies](#dependencies)
-2. [How AtomicKafka Works](#haw)
+1. [Built With](#dependencies)
+2. [Benefits of AtomicKafka](#ben)
 3. [Getting Started](#gs)
 4. [Contribution](#contribution)
 5. [License](#license)
 6. [Maintainers](#maintainers)
-7. [Built With](#bw)
 
 
 
 ___
-**<h2 id="dependencies">Dependencies</h2>**
-- Kafka-JS
-- Socket-IO (Server & Client)
-- React
-- Dotenv
+**<h2 id="dependencies">Built With</h2>**
+
+- [KafkaJS](https://kafka.js.org/)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Socket-IO](https://socket.io/)
+- [dotenv](https://github.com/motdotla/dotenv#readme)
+- The support of [OSLabs](https://opensourcelabs.io/)
 ___
-**<h2 id="haw">How AtomicKafka Works</h2>**
-![How AtomicKafka Works](./assets/howAKworks.png)
+**<h2 id="ben">Benefits of AtomicKafka</h2>**
+![AtomicKafka Supports Multiple Streams](./assets/howAKworks.png)
 
 ___
 
 **<h2 id="gs">Getting Started</h2>**
 
-### **1. Initialize Kafka Cluster:**
+### **1. Initialize Kafka cluster**
 
 Atomic Kafka currently supports running Apache Kafka clusters either using a Docker image or by connecting to Confluent Cloud.
 
@@ -68,8 +70,8 @@ Atomic Kafka currently supports running Apache Kafka clusters either using a Doc
 - Follow the steps on [Confluent Cloud](https://www.confluent.io/confluent-cloud/) to create a free account with Confluent cloud. Obtain the ***API_ACCESS_KEY***, **_API_ACCESS_SECRET_**, and ***BOOTSTRAP_SERVER***
 
 ___
-### **2. Configure *.env* file.**
-Include the following lines in your .env depending on your Kafka environment.
+### **2. Configure *.env* file**
+Include the following lines in your .env depending on your Kafka environment. Set the PORT variable to the port where **AtomicKafkaServer** will be initialized in the next step.
 
 - Docker .env config: (***API_KEY*** and ***API_SECRET*** are intentionally left blank)
   ```js
@@ -77,7 +79,6 @@ Include the following lines in your .env depending on your Kafka environment.
   API_KEY=
   API_SECRET=
   KAFKA_BOOTSTRAP_SERVER=localhost:9092
-  KAFKA_SSL=false
   ```
 - Confluent Cloud .env config: (***PORT*** intentionally left blank)
   ```js
@@ -87,7 +88,7 @@ Include the following lines in your .env depending on your Kafka environment.
   KAFKA_BOOTSTRAP_SERVER=<BOOTSTRAP_SERVER>
   ```
 ___
-### **3. Create Server Instance:**
+### **3. Create Server Instance**
 Initialize a server instance of your choice (HTTP, Node.js, etc). The example below contemplates a Node.js Express server.
 
 **ATTENTION:** a Server instance must be created for every remote Atomic Kafka Client.
@@ -96,9 +97,10 @@ Initialize a server instance of your choice (HTTP, Node.js, etc). The example be
 3. Define a ***server*** that listens on the user-defined PORT environment variable.
 4. Initialize an AtomicKafkaServer instance ***aks*** by passing in the ***server***.
 ```js
-//initialize and configure expressApp according to user specifications
+/* initialize and configure Node.js expressApp according to user specifications
+then add the following: */
 
-const AtomicKafkaServer = require('atomic-kafka/server')
+const AtomicKafkaServer = require('atomic-kafka/server');
 
 const server = expressApp.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);
@@ -107,76 +109,83 @@ const server = expressApp.listen(process.env.PORT, () => {
 const aks = new AtomicKafkaServer(server);
 ```
 ___
-### **4A. Create the Consumer and enable the built-in websocket on the server:**
+### **4A. Create the Consumer and enable the built-in websocket on the server**
 1. Initailize a **_newConsumer_** on the **_aks_** instance and pass in the **_group_ID_string_**.
 2. Enable the built-in websocket by invoking **_socketConsume_** and passing in the **_group_ID_string_**, an **_event_string_**, and the **_topic_string_**.
 
 ```js
-atomicKafkaInstance.newConsumer('group_ID_string');
-atomicKafkaInstance.socketConsume('group_ID_string', 'event_string', 'topic_string');
+/* AKS_Producer_Init */
+aks.newProducer('topic');
+aks.globalProduce('produceMessageEvent', 'topic');
 ```
 
 ___
-### **4B. Create the Producer and enable the built-in websocket on the server:**
+### **4B. Create the Producer and enable the built-in websocket on the server**
 1. Initailize a ***newProducer*** on the ***aks*** instance and pass in the ***topic_string***.
 2. Enable the built-in websocket by invoking ***globalProducer*** and passing in an ***event_string*** and the ***topic_string***.
 ```js
-atomicKafkaInstance.newProducer('topic_string');
-atomicKafkaInstance.globalProduce('postMessage', 'test_topic')
+/* AKS_Consumer_Init */
+aks.newConsumer('group_ID');
+aks.socketConsume('group_ID', 'consumeMessageEvent', 'topic');
 ```
 ___
 ### **5A. JavaScript - Import Client Interface (React & Hooks)**
 ```js
+/* in your React.jsx Component */
 import AtomicKafkaClient from 'atomic-kafka/client';
 ```
 ### **5B. TypeScript - Import Client Interface (React & Hooks)**
 ```js
-declare function require(name:string)
-const AtomicKafkaClient = require('atomic-kafka/client').default
+/* in your TypeScript React Component */
+declare function require(name:string);
+const AtomicKafkaClient = require('atomic-kafka/client').default;
+
 ```
 ___
-### **6A. Create and implement Consumer client component (JS & TS):**
+### **6A. Create and implement Consumer client component (JS & TS)**
   1. Initialize ***akc*** as an ***AtomicKafkaClient***. Pass in ***AtomicKafkaServer*** instance host's ***URI_STRING***
   2. Define a callback to process message ***payload*** through the React state management tool of your choice.
   3. Implement ***useInterval*** to consume from the kafka cluster on interval.
   4. Return the invocation of the ***consumer*** function on the ***akc*** instance. Pass in a user-defined websocket ***event_string***, the previously defined ***callback***, and the ***interval_delay*** in milliseconds.
 ```js
-function Consumer_Component () {
-
-  const akc = new AtomicKafkaClient(URI_STRING);
+function ConsumerComponent() {
+  const akc = new AtomicKafkaClient('ATOMIC_KAFKA_SERVER_URI_STRING');
 
   const callback = (payload) => {
-    //user-defined function definition
+    /* user-provided data stream processing function definition
+    that affects state change */
   }
 
-  akc.useInterval(() => akc.consumer(<event_string>, callback), <interval_delay>)
+  /* Throttles message consumption. Interval in milliseconds,
+  can be any number */
+  akc.useInterval(() => akc.consumer('consumeMessageEvent', callback), 4000);
 }
 ```
 
-### **6B.: Create and implement Producer client component (JS & TS):**
+### **6B. Create and implement Producer client component (JS & TS)**
 
 1. Initialize **_akc_** as an **_AtomicKafkaClient_**. Pass in **_AtomicKafkaServer_** instance host's **_URI_STRING_**
 2. Generate a ***payload*** formatted as an arbitrarily-nested JSON object. The example below defines a payload, but it can be generated at any point in the client according to the user's specification.
 3. Invoke the consumer function. Pass in the websocket ***event_string*** and the ***payload***.
 
 ```js
-function Producer_Component () {
-
-  const akc = new AtomicKafkaClient(URI_STRING);
+function ProducerComponent() {
+  const akc = new AtomicKafkaClient('ATOMIC_KAFKA_SERVER_URI_STRING');
 
   const payload = {
-    //arbitrarily nested key value pairs
-  };
+    /* Data to be sent to the cluster. Arbitrarily-nested JSON format.
+    Can be defined anywhere in the app. */
+  }
 
-  akc.producer(<event_string>, payload);
+  akc.producer('produceMessageEvent', payload);
 }
 ```
 ___
 **<h2 id="contribution">Contribution</h2>**
-We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), commit your awesome changes to a well-named feature branch of this repository, and make a pull-request. We value your input! 
+We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), your awesome changes to a well-named feature branch of this repository, and make a pull request. We look forward to your input!
 ___
 **<h2 id="maintainers">Maintainers</h2>**
-[Nikhil Massand](https://github.com/nikhilmassand) 
+[Nikhil Massand](https://github.com/nikhilmassand)
 
 [Vicki Yang](https://github.com/vickiwyang)
 
@@ -185,11 +194,3 @@ ___
 [Joseph Lee](https://github.com/amplifygospel)
 
 ___
-**<h2 id="bw">Built With</h2>**
-[KafkaJS](https://kafka.js.org/)
-
-[React](https://reactjs.org/)
-
-[TypeScript](https://www.typescriptlang.org/)
-
-The support of [OSLabs](https://opensourcelabs.io/)
