@@ -188,7 +188,7 @@ function ProducerComponent() {
 ```
 ___
 **<h2 id="contribution">Contribute</h2>**
-We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), your awesome changes to a well-named feature branch of this repository, and make a pull request. We look forward to your input! And if you are interested in AtomicKafka, please click on the [STAR](#star) button for us! 
+We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), add your awesome changes to a well-named feature branch of this repository, and make a pull request. We look forward to your input! And if you want to support AtomicKafka, please click on the [STAR](#star) button for us! 
 ___
 **<h2 id="maintainers">Maintainers</h2>**
 [Nikhil Massand](https://github.com/nikhilmassand)
