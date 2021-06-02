@@ -5,7 +5,7 @@ ___
 
 <p align="center">AtomicKafka is a lightweight <a href="https://github.com/oslabs-beta/AtomicKafka"> NPM Package </a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
 <br>
-<a href="http://www.atomickafka.com/">Homepage</a><span> &nbsp; | &nbsp;</span><a href="https://github.com/oslabs-beta/AtomicKafka">Library</a><span> &nbsp; | &nbsp;</span><a href="https://github.com/AtomicKafka">Demo Apps</a><span> &nbsp; | &nbsp;</span><a href="https://medium.com/@dbehmoaras/2eb79b20eaae?source=friends_link&sk=843b83b81eb79f37f0d2b8a96ce26212">Featured on Medium</a></p>
+<a href="http://www.atomickafka.com/">Website</a><span>&nbsp; | &nbsp;</span><a href="https://github.com/oslabs-beta/AtomicKafka">Library</a><span>&nbsp; | &nbsp;</span><a href="https://github.com/AtomicKafka">Demo Apps</a><span>&nbsp; | &nbsp;</span><a href="https://medium.com/@dbehmoaras/2eb79b20eaae?source=friends_link&sk=843b83b81eb79f37f0d2b8a96ce26212">Featured on Medium</a></p>
 
 
 <p align="center">
@@ -15,14 +15,15 @@ ___
   </a>
   <a href="https://github.com/oslabs-beta/atomickafka/graphs/contributors">
     <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/oslabs-beta/atomickafka?color=%2366FCF1&style=for-the-badge">
-  <a href="https://github.com/oslabs-beta/atomickafka/blob/main/LICENSE">
-    <img alt="NPM" src="https://img.shields.io/npm/l/atomic-kafka?color=%2366FCF1&style=for-the-badge">
+  </a>
+  <a id="star" href="https://github.com/oslabs-beta/AtomicKafka/stargazers">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/oslabs-beta/AtomicKafka?color=%2366FCF1&style=for-the-badge">
   </a>
   <a href="https://github.com/oslabs-beta/atomickafka/blob/main/LICENSE">
     <img alt="Last Commit" src="https://img.shields.io/github/last-commit/oslabs-beta/AtomicKafka?color=%2366FCF1&style=for-the-badge">
   </a>
-  <a id="star" href="https://github.com/oslabs-beta/AtomicKafka/stargazers">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/oslabs-beta/AtomicKafka?color=%2366FCF1&style=for-the-badge">
+  <a href="https://github.com/oslabs-beta/atomickafka/blob/main/LICENSE">
+    <img alt="NPM" src="https://img.shields.io/npm/l/atomic-kafka?color=%2366FCF1&style=for-the-badge">
   </a>
 </p>
 
