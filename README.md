@@ -17,7 +17,7 @@ ___
     <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/oslabs-beta/atomickafka?color=%2366FCF1&style=for-the-badge">
   </a>
   <a href="https://github.com/oslabs-beta/AtomicKafka/stargazers">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/oslabs-beta/AtomicKafka?color=%23F2E963&style=for-the-badge">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/oslabs-beta/AtomicKafka?color=%2366FCF1&style=for-the-badge">
   </a>
   <a href="https://github.com/oslabs-beta/atomickafka/blob/main/LICENSE">
     <img alt="Last Commit" src="https://img.shields.io/github/last-commit/oslabs-beta/AtomicKafka?color=%2366FCF1&style=for-the-badge">
