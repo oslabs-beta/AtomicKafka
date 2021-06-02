@@ -1,6 +1,8 @@
 ![AtomicKafka_MastHead](./assets/logo_rect.png)
 
 ___
+
+
 <p align="center">AtomicKafka is a lightweight <a href="https://github.com/oslabs-beta/AtomicKafka"> NPM Package </a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
 <br>
 <a href="">Homepage</a><span> &nbsp; | &nbsp;</span>
@@ -26,16 +28,14 @@ ___
 </p>
 
 ___
-**<h2>Table of Contents</h2>**
+
+**<h2 id="">Table of Contents</h2>**
 1. [Built With](#dependencies)
 2. [Benefits of AtomicKafka](#ben)
 3. [Getting Started](#gs)
 4. [Contribution](#contribution)
 5. [License](#license)
 6. [Maintainers](#maintainers)
-
-
-
 ___
 **<h2 id="dependencies">Built With</h2>**
 
@@ -45,6 +45,8 @@ ___
 - [Socket-IO](https://socket.io/)
 - [dotenv](https://github.com/motdotla/dotenv#readme)
 - The support of [OSLabs](https://opensourcelabs.io/)
+
+
 ___
 **<h2 id="ben">Benefits of AtomicKafka</h2>**
 ![AtomicKafka Supports Multiple Streams](./assets/howAKworks.png)
@@ -86,7 +88,13 @@ Include the following lines in your .env depending on your Kafka environment. Se
   KAFKA_BOOTSTRAP_SERVER=<BOOTSTRAP_SERVER>
   ```
 ___
-### **3. Create Server Instance**
+### **3. Install AtomicKafka**
+
+```sh
+$ npm install atomick-kafka
+```
+___
+### **4. Create Server Instance**
 Initialize a server instance of your choice (HTTP, Node.js, etc). The example below contemplates a Node.js Express server.
 
 ***ATTENTION: a Server instance must be created for every remote Atomic Kafka Client.***
@@ -107,8 +115,8 @@ const server = expressApp.listen(process.env.PORT, () => {
 const aks = new AtomicKafkaServer(server);
 ```
 ___
-### **4A. Create the Consumer and enable the built-in websocket on the server**
-1. Initailize a **_newConsumer_** on the **_aks_** instance and pass in the **_group_ID_string_**.
+### **5A. Create the Consumer and enable the built-in websocket on the server**
+1. Initialize a **_newConsumer_** on the **_aks_** instance and pass in the **_group_ID_string_**.
 2. Enable the built-in websocket by invoking **_socketConsume_** and passing in the **_group_ID_string_**, an **_event_string_**, and the **_topic_string_**.
 
 ```js
@@ -118,8 +126,8 @@ aks.globalProduce('produceMessageEvent', 'topic');
 ```
 
 ___
-### **4B. Create the Producer and enable the built-in websocket on the server**
-1. Initailize a ***newProducer*** on the ***aks*** instance and pass in the ***topic_string***.
+### **5B. Create the Producer and enable the built-in websocket on the server**
+1. Initialize a ***newProducer*** on the ***aks*** instance and pass in the ***topic_string***.
 2. Enable the built-in websocket by invoking ***globalProducer*** and passing in an ***event_string*** and the ***topic_string***.
 ```js
 /* AKS_Consumer_Init */
@@ -127,12 +135,12 @@ aks.newConsumer('group_ID');
 aks.socketConsume('group_ID', 'consumeMessageEvent', 'topic');
 ```
 ___
-### **5A. JavaScript - Import Client Interface (React & Hooks)**
+### **6A. JavaScript - Import Client Interface (React & Hooks)**
 ```js
 /* in your React.jsx Component */
 import AtomicKafkaClient from 'atomic-kafka/client';
 ```
-### **5B. TypeScript - Import Client Interface (React & Hooks)**
+### **6B. TypeScript - Import Client Interface (React & Hooks)**
 ```js
 /* in your TypeScript React Component */
 declare function require(name:string);
@@ -140,7 +148,7 @@ const AtomicKafkaClient = require('atomic-kafka/client').default;
 
 ```
 ___
-### **6A. Create and implement Consumer client component (JS & TS)**
+### **7A. Create and implement Consumer client component (JS & TS)**
   1. Initialize ***akc*** as an ***AtomicKafkaClient***. Pass in ***AtomicKafkaServer*** instance host's ***URI_STRING***
   2. Define a callback to process message ***payload*** through the React state management tool of your choice.
   3. Implement ***useInterval*** to consume from the kafka cluster on interval.
@@ -160,7 +168,7 @@ function ConsumerComponent() {
 }
 ```
 
-### **6B. Create and implement Producer client component (JS & TS)**
+### **7B. Create and implement Producer client component (JS & TS)**
 
 1. Initialize **_akc_** as an **_AtomicKafkaClient_**. Pass in **_AtomicKafkaServer_** instance host's **_URI_STRING_**
 2. Generate a ***payload*** formatted as an arbitrarily-nested JSON object. The example below defines a payload, but it can be generated at any point in the client according to the user's specification.
@@ -179,7 +187,7 @@ function ProducerComponent() {
 }
 ```
 ___
-**<h2 id="contribution">Contribution</h2>**
+**<h2 id="contribution">Contribute</h2>**
 We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), your awesome changes to a well-named feature branch of this repository, and make a pull request. We look forward to your input!
 ___
 **<h2 id="maintainers">Maintainers</h2>**
