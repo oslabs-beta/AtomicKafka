@@ -1,11 +1,10 @@
 ![AtomicKafka_MastHead](./assets/logo_rect.png)
 
 ___
-<p align="center;">AtomicKafka is a lightweight <a href="https://github.com/oslabs-beta/AtomicKafka"> NPM Package </a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
+<p align="center">AtomicKafka is a lightweight <a href="https://github.com/oslabs-beta/AtomicKafka"> NPM Package </a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
 <br>
-<a href="">Homepage</a>
-<br>
-<a href="https://medium.com/@dbehmoaras/2eb79b20eaae">Article</a></p>
+<a href="">Homepage</a><span> &nbsp; | &nbsp;</span>
+<a href="">Featured on Medium</a></p>
 
 
 <p align="center">
@@ -90,7 +89,7 @@ ___
 ### **3. Create Server Instance**
 Initialize a server instance of your choice (HTTP, Node.js, etc). The example below contemplates a Node.js Express server.
 
-**ATTENTION:** a Server instance must be created for every remote Atomic Kafka Client.
+***ATTENTION: a Server instance must be created for every remote Atomic Kafka Client.***
 1. Initialize and configure ***expressApp*** according to desired specifications.
 2. Require in ***AtomicKafkaServer***.
 3. Define a ***server*** that listens on the user-defined PORT environment variable.
@@ -152,7 +151,7 @@ function ConsumerComponent() {
 
   const callback = (payload) => {
     /* user-provided data stream processing function definition
-    that affects state change */
+    that effects state change */
   }
 
   /* Throttles message consumption. Interval in milliseconds,
