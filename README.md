@@ -90,7 +90,7 @@ ___
 ### **3. Install AtomicKafka**
 
 ```sh
-$ npm install atomick-kafka
+$ npm install atomic-kafka
 ```
 ___
 ### **4. Create Server Instance**
