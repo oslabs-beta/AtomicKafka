@@ -1,13 +1,52 @@
 ![AtomicKafka_MastHead](./assets/logo_rect.png)
+
 ___
-## **Dependencies**
+<p style="text-align: center;">AtomicKafka is a lightweight <a href="https://github.com/oslabs-beta/AtomicKafka"> NPM Package </a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
+<br>
+<a href="">Homepage</a>
+<br>
+<a href="https://medium.com/@dbehmoaras/2eb79b20eaae">Article</a></p> 
+
+
+<p align="center">
+  <a href="https://github.com/oslabs-beta/AtomicKafka/stargazers">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/oslabs-beta/atomickafka?color=%222ac0ba%0A&style=for-the-badge">
+  </a>
+  <a href="https://www.npmjs.com/package/atomic-kafka">
+    <img alt="npm" src="https://img.shields.io/npm/v/atomic-kafka?color=%222ac0ba%0A&style=for-the-badge">
+  </a>
+  <a href="https://github.com/oslabs-beta/atomickafka/graphs/contributors">
+    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/oslabs-beta/atomickafka?color=%222ac0ba%0A&style=for-the-badge">
+  <a href="https://github.com/oslabs-beta/atomickafka/blob/main/LICENSE">
+    <img alt="NPM" src="https://img.shields.io/npm/l/atomic-kafka?color=%222ac0ba%0A&style=for-the-badge">
+  </a>
+</p>
+
+___
+**<h2>Table of Contents</h2>**
+1. [Dependencies](#dependencies)
+2. [How AtomicKafka Works](#haw)
+3. [Getting Started](#gs)
+4. [Contribution](#contribution)
+5. [License](#license)
+6. [Maintainers](#maintainers)
+7. [Built With](#bw)
+
+
+
+___
+**<h2 id="dependencies">Dependencies</h2>**
 - Kafka-JS
 - Socket-IO (Server & Client)
 - React
 - Dotenv
 ___
+**<h2 id="haw">How AtomicKafka Works</h2>**
+![How AtomicKafka Works](./assets/howAKworks.png)
 
-## **Getting Started**:
+___
+
+**<h2 id="gs">Getting Started</h2>**
 
 ### **1. Initialize Kafka Cluster:**
 
@@ -127,4 +166,25 @@ function Producer_Component () {
   akc.producer(<event_string>, payload);
 }
 ```
+___
+**<h2 id="contribution">Contribution</h2>**
+We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), commit your awesome changes to a well-named feature branch of this repository, and make a pull-request. We value your input! 
+___
+**<h2 id="maintainers">Maintainers</h2>**
+[Nikhil Massand](https://github.com/nikhilmassand) 
 
+[Vicki Yang](https://github.com/vickiwyang)
+
+[David Behmoaras](https://github.com/dbehmoaras)
+
+[Joseph Lee](https://github.com/amplifygospel)
+
+___
+**<h2 id="bw">Built With</h2>**
+[KafkaJS](https://kafka.js.org/)
+
+[React](https://reactjs.org/)
+
+[TypeScript](https://www.typescriptlang.org/)
+
+The support of [OSLabs](https://opensourcelabs.io/)
