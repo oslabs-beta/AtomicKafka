@@ -1,6 +1,6 @@
 {
   "name": "atomic-kafka",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "beta package",
   "main": "srv-lib/AtomicKafkaServer.js",
   "exports": {
