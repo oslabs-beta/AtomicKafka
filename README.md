@@ -200,3 +200,6 @@ ___
 [Joseph Lee](https://github.com/amplifygospel)
 
 ___
+
+## License
+Released under the MIT License
