@@ -3,7 +3,7 @@
 ___
 
 
-<p align="center">AtomicKafka is a lightweight <a href="https://www.npmjs.com/package/atomic-kafka"> NPM Package </a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
+<p align="center">AtomicKafka is a lightweight <a href="https://www.npmjs.com/package/atomic-kafka"> NPM Package</a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
 <br>
 <a href="http://www.atomickafka.com/">Website</a><span>&nbsp; | &nbsp;</span><a href="https://github.com/oslabs-beta/AtomicKafka">Library</a><span>&nbsp; | &nbsp;</span><a href="https://github.com/AtomicKafka">Demo Apps</a><span>&nbsp; | &nbsp;</span><a href="https://medium.com/@dbehmoaras/2eb79b20eaae?source=friends_link&sk=843b83b81eb79f37f0d2b8a96ce26212">Featured on Medium</a></p>
 
