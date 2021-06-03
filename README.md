@@ -202,4 +202,4 @@ ___
 ___
 
 ## License
-Released under the MIT License
+This product is released under the MIT License
