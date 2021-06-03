@@ -30,23 +30,22 @@ ___
 ___
 
 **<h2 id="">Table of Contents</h2>**
-1. [Built With](#dependencies)
+1. [Features](#features)
 2. [Benefits of AtomicKafka](#ben)
 3. [Getting Started](#gs)
 4. [Contribution](#contribution)
-5. [License](#license)
-6. [Maintainers](#maintainers)
+5. [Maintainers](#maintainers)
+6. [Built With](#dependencies)
+7. [License](#license)
 ___
-**<h2 id="dependencies">Built With</h2>**
+**<h2 id="features">Features</h2>**
 
-- [KafkaJS](https://kafka.js.org/)
-- [React](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Socket-IO](https://socket.io/)
-- [dotenv](https://github.com/motdotla/dotenv#readme)
-- The support of [OSLabs](https://opensourcelabs.io/)
-
-
+- Websocket connections between the client and the server that accept user-defined event strings and callbacks
+- Broker initialization and connection to Apache Kafka
+- Consumer and Producer classes are predefined to be as modular as possible
+- Consumer functions accept user-defined callback functions to support lightweight stream processing
+- React Hook that throttles the websocket event listener with a time interval to maintain client performance
+- Supports multiple Kafka streams
 ___
 **<h2 id="ben">Benefits of AtomicKafka</h2>**
 ![AtomicKafka Supports Multiple Streams](./assets/howAKworks.png)
@@ -200,6 +199,15 @@ ___
 [Joseph Lee](https://github.com/amplifygospel)
 
 ___
+**<h2 id="dependencies">Built With</h2>**
 
-## License
+- [KafkaJS](https://kafka.js.org/)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Socket-IO](https://socket.io/)
+- [dotenv](https://github.com/motdotla/dotenv#readme)
+- The support of [OSLabs](https://opensourcelabs.io/)
+
+___
+## <h2 id="license">License</h2>
 This product is released under the MIT License
