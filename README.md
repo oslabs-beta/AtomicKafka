@@ -3,9 +3,9 @@
 ___
 
 
-<p align="center">AtomicKafka is a lightweight <a href="https://github.com/oslabs-beta/AtomicKafka"> NPM Package </a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
+<p align="center">AtomicKafka is a lightweight <a href="https://www.npmjs.com/package/atomic-kafka"> NPM Package</a> developed to simplify the process of establishing bidirectional, real-time data streaming with Apache Kafka in your web-app.
 <br>
-<a href="http://www.atomickafka.com/">Homepage</a><span> &nbsp; | &nbsp;</span><a href="https://github.com/oslabs-beta/AtomicKafka">Library</a><span> &nbsp; | &nbsp;</span><a href="https://github.com/AtomicKafka">Demo Apps</a><span> &nbsp; | &nbsp;</span><a href="https://medium.com/@dbehmoaras/2eb79b20eaae?source=friends_link&sk=843b83b81eb79f37f0d2b8a96ce26212">Featured on Medium</a></p>
+<a href="http://www.atomickafka.com/">Website</a><span>&nbsp; | &nbsp;</span><a href="https://github.com/oslabs-beta/AtomicKafka">Library</a><span>&nbsp; | &nbsp;</span><a href="https://github.com/AtomicKafka">Demo Apps</a><span>&nbsp; | &nbsp;</span><a href="https://medium.com/@dbehmoaras/2eb79b20eaae?source=friends_link&sk=843b83b81eb79f37f0d2b8a96ce26212">Featured on Medium</a></p>
 
 
 <p align="center">
@@ -15,37 +15,37 @@ ___
   </a>
   <a href="https://github.com/oslabs-beta/atomickafka/graphs/contributors">
     <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/oslabs-beta/atomickafka?color=%2366FCF1&style=for-the-badge">
-  <a href="https://github.com/oslabs-beta/atomickafka/blob/main/LICENSE">
-    <img alt="NPM" src="https://img.shields.io/npm/l/atomic-kafka?color=%2366FCF1&style=for-the-badge">
+  </a>
+  <a id="star" href="https://github.com/oslabs-beta/AtomicKafka/stargazers">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/oslabs-beta/AtomicKafka?color=%2366FCF1&style=for-the-badge">
   </a>
   <a href="https://github.com/oslabs-beta/atomickafka/blob/main/LICENSE">
     <img alt="Last Commit" src="https://img.shields.io/github/last-commit/oslabs-beta/AtomicKafka?color=%2366FCF1&style=for-the-badge">
   </a>
-  <a href="https://github.com/oslabs-beta/AtomicKafka/stargazers">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/oslabs-beta/AtomicKafka?color=%2366FCF1&style=for-the-badge">
+  <a href="https://github.com/oslabs-beta/atomickafka/blob/main/LICENSE">
+    <img alt="NPM" src="https://img.shields.io/npm/l/atomic-kafka?color=%2366FCF1&style=for-the-badge">
   </a>
 </p>
 
 ___
 
 **<h2 id="">Table of Contents</h2>**
-1. [Built With](#dependencies)
+1. [Features](#features)
 2. [Benefits of AtomicKafka](#ben)
 3. [Getting Started](#gs)
 4. [Contribution](#contribution)
-5. [License](#license)
-6. [Maintainers](#maintainers)
+5. [Maintainers](#maintainers)
+6. [Built With](#dependencies)
+7. [License](#license)
 ___
-**<h2 id="dependencies">Built With</h2>**
+**<h2 id="features">Features</h2>**
 
-- [KafkaJS](https://kafka.js.org/)
-- [React](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Socket-IO](https://socket.io/)
-- [dotenv](https://github.com/motdotla/dotenv#readme)
-- The support of [OSLabs](https://opensourcelabs.io/)
-
-
+- Websocket connections between the client and the server that accept user-defined event strings and callbacks
+- Broker initialization and connection to Apache Kafka
+- Consumer and Producer classes are predefined to be as modular as possible
+- Consumer functions accept user-defined callback functions to support lightweight stream processing
+- React Hook that throttles the websocket event listener with a time interval to maintain client performance
+- Supports multiple Kafka streams
 ___
 **<h2 id="ben">Benefits of AtomicKafka</h2>**
 ![AtomicKafka Supports Multiple Streams](./assets/howAKworks.png)
@@ -90,7 +90,7 @@ ___
 ### **3. Install AtomicKafka**
 
 ```sh
-$ npm install atomick-kafka
+$ npm install atomic-kafka
 ```
 ___
 ### **4. Create Server Instance**
@@ -187,7 +187,7 @@ function ProducerComponent() {
 ```
 ___
 **<h2 id="contribution">Contribute</h2>**
-We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), your awesome changes to a well-named feature branch of this repository, and make a pull request. We look forward to your input!
+We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), add your awesome changes to a well-named feature branch of this repository, and make a pull request. We look forward to your input! And if you want to support AtomicKafka, please click on the [STAR](#star) button for us! 
 ___
 **<h2 id="maintainers">Maintainers</h2>**
 [Nikhil Massand](https://github.com/nikhilmassand)
@@ -199,3 +199,15 @@ ___
 [Joseph Lee](https://github.com/amplifygospel)
 
 ___
+**<h2 id="dependencies">Built With</h2>**
+
+- [KafkaJS](https://kafka.js.org/)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Socket-IO](https://socket.io/)
+- [dotenv](https://github.com/motdotla/dotenv#readme)
+- The support of [OSLabs](https://opensourcelabs.io/)
+
+___
+## <h2 id="license">License</h2>
+This product is released under the MIT License
