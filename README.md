@@ -56,7 +56,7 @@ ___
 
 ### **1. Initialize Kafka cluster**
 
-Atomic Kafka currently supports running Apache Kafka clusters either using a Docker image or by connecting to Confluent Cloud.
+AtomicKafka currently supports running Apache Kafka clusters either using a Docker image or by connecting to Confluent Cloud.
 
 
 **Docker:**
@@ -96,7 +96,7 @@ ___
 ### **4. Create Server Instance**
 Initialize a server instance of your choice (HTTP, Node.js, etc). The example below contemplates a Node.js Express server.
 
-***ATTENTION: a Server instance must be created for every remote Atomic Kafka Client.***
+***ATTENTION: a Server instance must be created for every remote AtomicKafkaClient.***
 1. Initialize and configure ***expressApp*** according to desired specifications.
 2. Require in ***AtomicKafkaServer***.
 3. Define a ***server*** that listens on the user-defined PORT environment variable.
@@ -187,7 +187,9 @@ function ProducerComponent() {
 ```
 ___
 **<h2 id="contribution">Contribute</h2>**
-We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), add your awesome changes to a well-named feature branch of this repository, and make a pull request. We look forward to your input! And if you want to support AtomicKafka, please click on the [STAR](#star) button for us!
+
+We want this open-sourced project to continue to improve. If you would like to make a contribution to AtomicKafka, please fork [this repo](https://github.com/oslabs-beta/AtomicKafka), add your awesome changes to a well-named feature branch of this repository, and make a pull request. We look forward to your input! And if you want to support AtomicKafka, please click on the [⭐](https://github.com/oslabs-beta/AtomicKafka/stargazers)  button for us! 
+
 ___
 **<h2 id="maintainers">Maintainers</h2>**
 [Nikhil Massand](https://github.com/nikhilmassand)
