@@ -56,7 +56,7 @@ ___
 
 ### **1. Initialize Kafka cluster**
 
-Atomic Kafka currently supports running Apache Kafka clusters either using a Docker image or by connecting to Confluent Cloud.
+AtomicKafka currently supports running Apache Kafka clusters either using a Docker image or by connecting to Confluent Cloud.
 
 
 **Docker:**
