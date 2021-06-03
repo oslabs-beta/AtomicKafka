@@ -48,7 +48,7 @@ ___
 - Supports multiple Kafka streams
 ___
 **<h2 id="ben">Benefits of AtomicKafka</h2>**
-![AtomicKafka Supports Multiple Streams](./assets/howAKworks.png)
+![AtomicKafka Supports Multiple Streams](./assets/howAKworks2.png)
 
 ___
 
