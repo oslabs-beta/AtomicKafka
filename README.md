@@ -81,7 +81,7 @@ Include the following lines in your .env depending on your Kafka environment. Se
   ```
 - Confluent Cloud .env config: (***PORT*** intentionally left blank)
   ```js
-  PORT=<USER_DEFINED>
+  PORT=
   API_KEY=<API_ACCESS_KEY>
   API_SECRET=<API_ACCESS_SECRET>
   KAFKA_BOOTSTRAP_SERVER=<BOOTSTRAP_SERVER>
