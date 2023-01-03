@@ -198,7 +198,7 @@ ___
 
 [David Behmoaras](https://github.com/dbehmoaras)
 
-[Joseph Lee](https://github.com/amplifygospel)
+[Joseph Lee](https://github.com/josephjslee)
 
 ___
 **<h2 id="dependencies">Built With</h2>**
